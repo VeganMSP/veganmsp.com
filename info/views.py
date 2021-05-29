@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
-from .models import Restaurant
+from .models import (
+	Restaurant
+)
 
 
 class IndexView(TemplateView):

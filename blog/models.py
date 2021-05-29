@@ -17,8 +17,8 @@ class Post(models.Model):
 		on_delete=models.CASCADE
 
 	)
-	date_created = models.DateTimeField(auto_now_add=True)
-	date_updated = models.DateTimeField(auto_now=True)
+	date_created = models.DateTimeField(default=timezone.now)
+	date_updated = models.DateTimeField()
 	content = models.TextField()
 	status = models.IntegerField(choices=POST_STATUS, default=0)
 	slug = models.SlugField(
@@ -36,4 +36,7 @@ class Post(models.Model):
 	def save(self, *args, **kwargs):
 		value = self.title
 		self.slug = slugify(value, allow_unicode=True)
+
+		self.date_updated = datetime.now()
+
 		super().save(*args, **kwargs)

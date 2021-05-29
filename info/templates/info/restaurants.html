@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content">
 You're at the Restaurant List<br /><br />
 
 {% if restaurant_list %}
@@ -9,3 +13,5 @@ You're at the Restaurant List<br /><br />
 {% else %}
 	<p>No restaurants in the database!</p>
 {% endif %}
+</div>
+{% endblock %}

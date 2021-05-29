@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Document Settings -->
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<title>{% block title %}VeganMSP.com{% endblock %}</title>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<div class="header-col-1">
+				<h1 class="page-title">
+					{% if title %}
+						{{ title }}
+					{% else %}
+						VeganMSP.com
+					{% endif %}
+				</h1>
+			</div>
+			<div class="tagline header-col-2"><span>
+				Just another vegan information site.
+			</span></div>
+		</header>
+
+		<nav>
+			{% include 'includes/_nav.html' %}
+		</nav>
+
+		<div class="content">
+			{% block content %}{% endblock %}
+		</div>
+
+		<div class="footer">
+			<div class="footer-col-1">
+				{% include "includes/_site-bio.html" %}
+			</div>
+			<div class="footer-col-2">
+				{% include "includes/_licenses.html" %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

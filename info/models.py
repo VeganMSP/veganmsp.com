@@ -3,10 +3,10 @@ from django.utils.text import slugify
 
 
 class City(models.Model):
+	name = models.CharField(max_length=200)
+	description = models.TextField(blank=True)
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
-	description = models.TextField(blank=True)
-	name = models.CharField(max_length=200)
 
 	def __str__(self):
 		return self.name
@@ -24,23 +24,28 @@ class Neighborhood(models.Model):
 
 
 class Address(models.Model):
-	city = models.ForeignKey(City, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, blank=True)
-	state = models.CharField(max_length=2)
 	street1 = models.CharField(max_length=200, blank=True)
 	street2 = models.CharField(max_length=200, blank=True)
-	zip_code = models.CharField(max_length=10)
+	city = models.ForeignKey(City, on_delete=models.CASCADE)
+	state = models.CharField(max_length=2)
+	zip_code = models.CharField(max_length=10, blank=True)
 
 	def __str__(self):
 		if self.name != "":
 			return self.name
-		else:
+		elif self.street1 != "":
 			return self.street1 + " - " + self.city.name
+		else:
+			return self.city.name
 
 
 class RestaurantLocation(models.Model):
 	address = models.ForeignKey(Address, on_delete=models.CASCADE)
 	phone = models.CharField(max_length=20, blank=True)
+
+	def __str__(self):
+		return self.address.city.name
 
 
 class Restaurant(models.Model):

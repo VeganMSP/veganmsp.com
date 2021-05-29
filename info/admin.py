@@ -15,7 +15,7 @@ class NeighborhoodAdmin(admin.ModelAdmin):
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-	list_display = ('name', 'slug')
+	list_display = ('name', 'slug', 'location')
 	search_fields = ['name', 'description']
 
 

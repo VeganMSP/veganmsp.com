@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from .models import Restaurant
 
@@ -14,22 +14,16 @@ class AboutView(TemplateView):
 	template_name = 'info/about.html'
 
 
-def about(request):
-	return HttpResponse("You're at the about page")
+class LinkIndex(TemplateView):
+	template_name = 'info/links.html'
 
 
-def links(request):
-	return HttpResponse("You're at the Links List")
+class RestaurantIndex(ListView):
+	template_name = 'info/restaurants.html'
+
+	def get_queryset(self):
+		return Restaurant.objects.order_by('name')
 
 
-def restaurants(request):
-	restaurant_list = Restaurant.objects.order_by('name')
-	template = loader.get_template('info/restaurants.html')
-	context = {
-		'restaurant_list': restaurant_list,
-	}
-	return HttpResponse(template.render(context, request))
-
-
-def shopping(request):
-	return HttpResponse("You're at the Shopping List")
+class ShoppingIndex(TemplateView):
+	template_name = 'info/shopping.html'

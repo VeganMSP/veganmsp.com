@@ -1,11 +1,17 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 from .models import Restaurant
 
-def index(request):
-	return HttpResponse("Hello, world. You're at the info index.")
+
+class IndexView(TemplateView):
+	template_name = 'info/index.html'
+
+
+class AboutView(TemplateView):
+	template_name = 'info/about.html'
 
 
 def about(request):

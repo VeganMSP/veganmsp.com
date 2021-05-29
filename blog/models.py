@@ -33,6 +33,9 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 
+	def get_author(self):
+		return self.author.get_full_name()
+
 	def save(self, *args, **kwargs):
 		value = self.title
 		self.slug = slugify(value, allow_unicode=True)

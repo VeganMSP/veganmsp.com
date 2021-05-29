@@ -1,0 +1,11 @@
+You're at the Restaurant List<br /><br />
+
+{% if restaurant_list %}
+	<ul>
+		{% for restaurant in restaurant_list %}
+			<li><a href="">{{ restaurant.name }}</a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No restaurants in the database!</p>
+{% endif %}

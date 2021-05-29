@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load markdown_extras %}
+
+{% block title %}Blog - VeganMSP.com{% endblock %}
+{% block page_title %}Blog{% endblock %}
+
+{% block content %}
+<div class="page-content">
+	{% for post in post_list %}
+	<div class="row">
+		<h2 class="post-title">{{ post.title }}</h2>
+		<p class="text-muted">{{ post.author }}</p>
+		<p class="post-content">{{ post.content | slice:":200" }}</p>
+		<a href="{% url 'blog:post_detail' post.slug %}">Read More &rarr;</a>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% load markdown_extras %}
+
+{% block content %}
+<div class="page-content">
+	<h1>{% block title %} {{ object.title }} {%endblock title%}</h1>
+	<p class="text-muted">{{ post.author }} | {{ post.date_created }}</p>
+	<p class="post-content">{{object.content | markdown | safe }}</p>
+</div>
+{% endblock %}

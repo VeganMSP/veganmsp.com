@@ -15,11 +15,9 @@
 		<header>
 			<div class="header-col-1">
 				<h1 class="page-title">
-					{% if title %}
-						{{ title }}
-					{% else %}
+					{% block page_title %}
 						VeganMSP.com
-					{% endif %}
+					{% endblock %}
 				</h1>
 			</div>
 			<div class="tagline header-col-2"><span>

@@ -1,5 +1,7 @@
-from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import User
+from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 
 POST_STATUS = (

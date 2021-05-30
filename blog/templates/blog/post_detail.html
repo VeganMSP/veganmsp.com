@@ -9,6 +9,7 @@
 		{{ post.get_author }} | {{ post.date_created }} {% if user.is_authenticated %}
 		| <a href="{% url 'blog:post_update' post.slug %}">Edit</a> | <span class="text-danger">
 			<a href="{% url 'blog:post_delete' post.slug %}">Delete Post</a>
+		</span>
 		{% endif %}
 	</p>
 	<p class="post-content">{{object.content | markdown | safe }}</p>

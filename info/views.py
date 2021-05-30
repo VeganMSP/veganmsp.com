@@ -1,13 +1,19 @@
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
-from .models import Restaurant
+from blog.models import Post
+
+from .models import (
+	Restaurant
+)
 
 
 class IndexView(TemplateView):
 	template_name = 'info/index.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['recent_posts_list'] = Post.objects.order_by('-date_created')[:5]
+		return context
 
 
 class AboutView(TemplateView):

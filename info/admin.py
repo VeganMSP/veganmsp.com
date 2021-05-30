@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import City, Neighborhood, Restaurant, Address, FarmersMarket, RestaurantLocation
+from .models import (
+	Address,
+	City,
+	FarmersMarket,
+	Neighborhood,
+	Restaurant,
+	RestaurantLocation,
+)
 
 
 class CityAdmin(admin.ModelAdmin):

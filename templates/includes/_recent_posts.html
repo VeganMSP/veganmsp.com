@@ -1,0 +1,10 @@
+<div class="recent-posts">
+	{% for post in recent_posts_list %}
+	<div class="post-stub">
+		{{ post.date_created | date:"Y-m-d" }}
+		<a class="recent-post-link" href="{% url 'blog:post_detail' post.slug %}">
+			{{ post.title }}
+		</a>
+	</div>
+	{% endfor %}
+</div>

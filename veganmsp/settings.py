@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
-
     'info.apps.InfoConfig',
 
     'django.contrib.admin',
@@ -41,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,10 @@ LOGGING = {
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Graphing models
+
+GRAPH_MODELS = {
+    'pygraphviz': True,
+    'group_models': True,
+}

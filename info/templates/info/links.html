@@ -2,6 +2,16 @@
 
 {% block content %}
 <div class="page-content">
+You're at the Links List<br /><br />
 
+{% if links_list %}
+	<ul>
+		{% for link in links_list %}
+			<li><a href="">{{ link.name }}</a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No links in the database!</p>
+{% endif %}
 </div>
 {% endblock %}

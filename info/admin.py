@@ -7,6 +7,7 @@ from .models import (
 	Neighborhood,
 	Restaurant,
 	RestaurantLocation,
+	VeganCompany,
 )
 
 
@@ -40,3 +41,4 @@ class FarmersMarketAdmin(admin.ModelAdmin):
 
 admin.site.register(Address)
 admin.site.register(FarmersMarket, FarmersMarketAdmin)
+admin.site.register(VeganCompany)

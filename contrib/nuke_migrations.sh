@@ -24,4 +24,7 @@ python ./manage.py makemigrations
 
 echo 'Applying migrations...'
 python ./manage.py migrate
+
+echo 'Creating default admin user...'
+python ./manage.py shell < ./veganmsp/default_admin_user.py
 deactivate

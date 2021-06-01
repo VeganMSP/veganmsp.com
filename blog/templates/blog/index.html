@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="page-content">
+	{% if post_list %}
 	{% for post in post_list %}
 	<div class="post-stub">
 		<h2 class="post-title">
@@ -20,5 +21,10 @@
 		<p class="post-content">{{ post.content | markdown | safe | slice:":300" }}</p>
 	</div>
 	{% endfor %}
+	{% else %}
+		<p>
+			There are no posts on the blog!
+		</p>
+	{% endif %}
 </div>
 {% endblock %}

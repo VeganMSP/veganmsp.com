@@ -24,5 +24,7 @@ python ./manage.py makemigrations
 
 echo 'Applying migrations...'
 python ./manage.py migrate
-python ./manage.py createsuperuser
+
+echo 'Creating default admin user...'
+python ./manage.py shell < ./veganmsp/default_admin_user.py
 deactivate

@@ -24,4 +24,5 @@ python ./manage.py makemigrations
 
 echo 'Applying migrations...'
 python ./manage.py migrate
+python ./manage.py createsuperuser
 deactivate

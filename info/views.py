@@ -3,7 +3,9 @@ from django.views.generic import TemplateView, ListView
 from blog.models import Post
 
 from .models import (
-	Restaurant
+	Restaurant,
+	FarmersMarket,
+	VeganCompany,
 )
 
 
@@ -33,3 +35,9 @@ class RestaurantIndex(ListView):
 
 class ShoppingIndex(TemplateView):
 	template_name = 'info/shopping.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['farmers_market_list'] = FarmersMarket.objects.order_by('name')
+		context['vegan_com_list'] = VeganCompany.objects.order_by('name')
+		return context

@@ -11,6 +11,9 @@ class City(models.Model):
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		verbose_name_plural = "cities"
+
 
 class Neighborhood(models.Model):
 	city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -38,6 +41,9 @@ class Address(models.Model):
 			return self.street1 + " - " + self.city.name
 		else:
 			return self.city.name
+
+	class Meta:
+		verbose_name_plural = "addresses"
 
 
 class RestaurantLocation(models.Model):
@@ -89,6 +95,9 @@ class VeganCompany(models.Model):
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		verbose_name_plural = "vegan companies"
+
 
 class LinkCategory(models.Model):
 	name = models.CharField(max_length=200)
@@ -96,6 +105,9 @@ class LinkCategory(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	class Meta:
+		verbose_name_plural = "link categories"
 
 
 class Link(models.Model):

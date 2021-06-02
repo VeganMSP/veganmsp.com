@@ -80,10 +80,29 @@ class FarmersMarket(models.Model):
 	def __str__(self):
 		return self.name
 
+
 class VeganCompany(models.Model):
 	name = models.CharField(max_length=200)
 	website = models.CharField(max_length=2000, blank=True)
 	description = models.TextField(blank=True)
+
+	def __str__(self):
+		return self.name
+
+
+class LinkCategory(models.Model):
+	name = models.CharField(max_length=200)
+	description = models.TextField(blank=True)
+
+	def __str__(self):
+		return self.name
+
+
+class Link(models.Model):
+	name = models.CharField(max_length=200)
+	website = models.CharField(max_length=200)
+	description = models.TextField(blank=True)
+	category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.name

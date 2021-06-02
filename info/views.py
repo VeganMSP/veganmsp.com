@@ -3,8 +3,10 @@ from django.views.generic import TemplateView, ListView
 from blog.models import Post
 
 from .models import (
-	Restaurant,
 	FarmersMarket,
+	Link,
+	LinkCategory,
+	Restaurant,
 	VeganCompany,
 )
 
@@ -24,6 +26,11 @@ class AboutView(TemplateView):
 
 class LinkIndex(TemplateView):
 	template_name = 'info/links.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['links_list'] = Link.objects.order_by('category__name', 'name')
+		return context
 
 
 class RestaurantIndex(ListView):

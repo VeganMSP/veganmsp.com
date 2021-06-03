@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from mptt.models import MPTTModel, TreeForeignKey
+
 
 class City(models.Model):
 	name = models.CharField(max_length=200)
@@ -99,22 +101,52 @@ class VeganCompany(models.Model):
 		verbose_name_plural = "vegan companies"
 
 
-class LinkCategory(models.Model):
+class LinkCategory(MPTTModel):
 	name = models.CharField(max_length=200)
+	slug = models.SlugField(
+		unique=True,
+		editable=False,
+	)
 	description = models.TextField(blank=True)
-
-	def __str__(self):
-		return self.name
+	parent = TreeForeignKey(
+		'self',
+		blank=True,
+		null=True,
+		related_name='child',
+		on_delete=models.CASCADE
+	)
 
 	class Meta:
+		unique_together = ('slug', 'parent',)
 		verbose_name_plural = "link categories"
+
+	def __str__(self):
+		full_path = [self.name]
+		k = self.parent
+		while k is not None:
+			full_path.append(k.name)
+			k = k.parent
+
+		return ' -> '.join(full_path[::-1])
+
+	def get_name(self):
+		return self.name
+
+	def save(self, *args, **kwargs):
+		slug = self.name
+		self.slug = slugify(slug, allow_unicode=True)
+		super().save(*args, **kwargs)
 
 
 class Link(models.Model):
 	name = models.CharField(max_length=200)
 	website = models.CharField(max_length=200)
 	description = models.TextField(blank=True)
-	category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE)
+	category = models.ForeignKey(
+		LinkCategory,
+		related_name='links',
+		on_delete=models.CASCADE
+	)
 
 	def __str__(self):
 		return self.name

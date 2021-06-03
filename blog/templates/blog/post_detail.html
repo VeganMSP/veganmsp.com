@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load markdown_extras %}
+{% load html_extras %}
 
 {% block content %}
 <div class="page-content">
@@ -10,6 +11,12 @@
 		| <a href="{% url 'blog:post_update' post.slug %}">Edit</a> | <span class="text-danger">
 			<a href="{% url 'blog:post_delete' post.slug %}">Delete Post</a>
 		</span>
+		{% endif %}
+	</p>
+	<p class="text-muted">
+		{% if post.category %}
+			Posted in:
+			<a href="{% url 'blog:category_detail' post.category.id %}">{{ post.category.get_name }}</a>
 		{% endif %}
 	</p>
 	<p class="post-content">{{object.content | markdown | safe }}</p>

@@ -4,6 +4,7 @@
 <div class="page-content">
 You're at the Links List<br /><br />
 
+{% if category_list %}
 {% regroup links_list by category as category_list %}
 {% for category, links in category_list %}
 	<h2>{{ category }}</h2>
@@ -13,5 +14,8 @@ You're at the Links List<br /><br />
 		{% endfor %}
 	</ul>
 {% endfor %}
+{% else %}
+	<p>There are no links in the database!</p>
+{% endif %}
 </div>
 {% endblock %}

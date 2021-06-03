@@ -78,7 +78,10 @@ class Post(models.Model):
 		return self.title
 
 	def get_author(self):
-		return self.author.get_full_name()
+		author = self.author.get_full_name()
+		if author == '':
+			author = self.author
+		return author
 
 	def save(self, *args, **kwargs):
 		value = self.title

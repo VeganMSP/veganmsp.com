@@ -3,12 +3,30 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from .forms import PostModelForm
-from .models import Post
+from .models import Post, Category
 
 
 class IndexView(ListView):
 	queryset = Post.objects.filter(status=1).order_by('-date_created')
 	template_name = 'blog/index.html'
+
+
+def category_detail(request, category_id):
+	if request.method == 'GET':
+		current_category = Category.objects.get(pk=category_id)
+
+		children = current_category.get_children()
+		ancestors = current_category.get_ancestors()
+		posts = current_category.posts.all()
+
+		context = {
+			'categories': children,
+			'current_category': current_category,
+			'ancestors': ancestors,
+			'posts': posts,
+		}
+	print(context)
+	return render(request, 'blog/category_detail.html', context)
 
 
 class PostDetail(DetailView):

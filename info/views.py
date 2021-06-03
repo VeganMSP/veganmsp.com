@@ -5,7 +5,6 @@ from blog.models import Post
 from .models import (
 	FarmersMarket,
 	Link,
-	LinkCategory,
 	Restaurant,
 	VeganCompany,
 )

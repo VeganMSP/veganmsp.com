@@ -142,7 +142,11 @@ class Link(models.Model):
 	name = models.CharField(max_length=200)
 	website = models.CharField(max_length=200)
 	description = models.TextField(blank=True)
-	category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE)
+	category = models.ForeignKey(
+		LinkCategory,
+		related_name='links',
+		on_delete=models.CASCADE
+	)
 
 	def __str__(self):
 		return self.name

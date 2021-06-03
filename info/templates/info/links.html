@@ -2,8 +2,6 @@
 
 {% block content %}
 <div class="page-content">
-You're at the Links List<br /><br />
-
 {% if links_list %}
 {% regroup links_list by category as category_list %}
 {% for category, links in category_list %}

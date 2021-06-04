@@ -68,6 +68,7 @@ class Restaurant(models.Model):
 	)
 	website = models.CharField(blank=True, max_length=2000)
 	description = models.TextField(blank=True)
+	all_vegan = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name

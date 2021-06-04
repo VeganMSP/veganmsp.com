@@ -33,10 +33,22 @@ class LinkIndex(TemplateView):
 
 
 class RestaurantIndex(ListView):
-	template_name = 'info/restaurants.html'
+	template_name = 'info/restaurant_list.html'
 
 	def get_queryset(self):
 		return Restaurant.objects.order_by('name')
+
+class AllVeganRestaurants(ListView):
+	template_name = 'info/restaurant_list.html'
+
+	def get_queryset(self):
+		return Restaurant.objects.filter(
+			all_vegan=True).order_by('name')
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['page_title'] = 'All Vegan Restaurants'
+		return context
 
 
 class ShoppingIndex(TemplateView):

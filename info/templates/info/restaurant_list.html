@@ -7,14 +7,14 @@
 {% endif %}
 {% if restaurant_list %}
 {% regroup restaurant_list by location as location_list %}
-	<ul>
-		{% for location, restaurants in location_list %}
-			<h2>{{location}}</h2>
+	{% for location, restaurants in location_list %}
+		<h2>{{location}}</h2>
+		<ul>
 			{% for restaurant in restaurants %}
 			<li><a href="">{{ restaurant.name }}</a></li>
 			{% endfor %}
-		{% endfor %}
-	</ul>
+		</ul>
+	{% endfor %}
 {% else %}
 	<p>No restaurants in the database!</p>
 {% endif %}

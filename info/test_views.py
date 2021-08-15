@@ -1,18 +1,5 @@
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-
-from info.models import (
-	City,
-	Neighborhood,
-	Address,
-	RestaurantLocation,
-	Restaurant,
-	FarmersMarket,
-	VeganCompany,
-	LinkCategory,
-	Link,
-)
 
 
 class IndexViewTest(TestCase):

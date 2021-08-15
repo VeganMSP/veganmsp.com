@@ -16,6 +16,7 @@ Django = "==3.2.3"
 
 [dev-packages]
 pygraphviz = "==1.7"
+coverage = "*"
 
 [requires]
 python_version = "3.9"

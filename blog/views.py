@@ -25,7 +25,6 @@ def category_detail(request, category_id):
 			'ancestors': ancestors,
 			'posts': posts,
 		}
-	print(context)
 	return render(request, 'blog/category_detail.html', context)
 
 

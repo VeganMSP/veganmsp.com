@@ -87,6 +87,6 @@ class Post(models.Model):
 		value = self.title
 		self.slug = slugify(value, allow_unicode=True)
 
-		self.date_updated = datetime.now()
+		self.date_updated = timezone.now()
 
 		super().save(*args, **kwargs)

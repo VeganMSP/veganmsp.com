@@ -23,7 +23,7 @@ jobs:
         python -m pip install pipenv wheel
     - name: Install Dependencies
       run: |
-        pipenv install --dev
+        pipenv install
     - name: Run Tests
       run: |
         pipenv run python manage.py test

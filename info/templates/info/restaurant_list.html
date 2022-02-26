@@ -11,7 +11,11 @@
 		<h2>{{location}}</h2>
 		<ul>
 			{% for restaurant in restaurants %}
-			<li><a href="">{{ restaurant.name }}</a></li>
+			{% if restaurant.website %}
+			<li><a href="{{restaurant.website}}">{{ restaurant.name }}</a></li>
+			{% else %}
+			<li>{{ restaurant.name }}</li>
+			{% endif %}
 			{% endfor %}
 		</ul>
 	{% endfor %}

@@ -23,6 +23,12 @@
 			<div class="tagline header-col-2"><span>
 				Just another vegan information site.
 			</span></div>
+			{% if user.is_authenticated %}
+			<div>
+				Welcome, {{user}} | <a href="{% url 'admin:index' %}">Admin</a> |
+				<a href="{% url 'logout' %}">Log out</a>
+			</div>
+			{% endif %}
 		</header>
 
 		<nav>
@@ -39,6 +45,12 @@
 			</div>
 			<div class="footer-col-2">
 				{% include "includes/_licenses.html" %}
+				
+				{% if not user.is_authenticated %}
+				<p>
+					<a href="{% url 'login' %}">Log in</a>
+				</p>
+				{% endif %}
 			</div>
 		</div>
 	</div>

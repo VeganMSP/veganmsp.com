@@ -1,3 +1,4 @@
+{% if recent_posts_list %}
 <div class="recent-posts">
 	<h2>Recent Blog Posts</h2>
 	{% for post in recent_posts_list %}
@@ -9,3 +10,4 @@
 	</div>
 	{% endfor %}
 </div>
+{% endif %}

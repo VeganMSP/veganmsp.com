@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content">
+	<form method="post">
+		{% csrf_token %}
+		<div class="form-row">
+			<div class="alert alert-warning">
+				Are you sure you want to delete {{ restaurant }}?
+			</div>
+		</div>
+		<button type="submit" class="btn btn-danger">Delete restaurant "{{ restaurant }}"</button>
+	</form>
+</div>
+{% endblock %}

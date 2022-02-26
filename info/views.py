@@ -1,4 +1,8 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView
+
+from .forms import RestaurantModelForm
 
 from blog.models import Post
 
@@ -59,3 +63,33 @@ class ShoppingIndex(TemplateView):
 		context['farmers_market_list'] = FarmersMarket.objects.order_by('name')
 		context['vegan_com_list'] = VeganCompany.objects.order_by('name')
 		return context
+
+@login_required
+def restaurant_create(request):
+	if request.method == 'POST':
+		form = RestaurantModelForm(request.POST)
+		if form.is_valid():
+			restaurant = form.save(commit=False)
+			restaurant.save()
+			return redirect('info:restaurant_list')
+	form = RestaurantModelForm()
+	return render(request, 'info/restaurant_form.html', {'form': form})
+
+@login_required
+def restaurant_update(request, slug):
+	restaurant = get_object_or_404(Restaurant, slug=slug)
+	form = RestaurantModelForm(request.POST or None, instance=restaurant)
+	if form.is_valid():
+		form.save()
+		return redirect('info:restaurant_list')
+
+	return render(request, 'info/restaurant_form.html', {'form': form})
+
+
+@login_required
+def restaurant_delete(request, slug):
+	restaurant = get_object_or_404(Restaurant, slug=slug)
+	if request.method == 'POST':
+		restaurant.delete()
+		return redirect('info:restaurant_list')
+	return render(request, 'info/restaurant_delete.html', {'restaurant': restaurant})

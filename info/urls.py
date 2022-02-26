@@ -13,5 +13,8 @@ urlpatterns = [
 		views.AllVeganRestaurants.as_view(),
 		name='all_vegan_list'
 	),
+	path('restaurant/add', views.restaurant_create, name='restaurant_create'),
+	path('restaurant/edit/<slug:slug>', views.restaurant_update, name='restaurant_update'),
+	path('restaurant/delete/<slug:slug>', views.restaurant_delete, name='restaurant_delete'),
 	path('shopping/', views.ShoppingIndex.as_view(), name='shopping'),
 ]

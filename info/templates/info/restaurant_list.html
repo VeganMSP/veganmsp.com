@@ -5,6 +5,11 @@
 {% if page_title %}
 <h1 class="page-title">{{page_title}}</h1>
 {% endif %}
+
+{% if user.is_authenticated %}
+	<a href="{% url 'info:restaurant_create' %}">Add Restaurant</a>
+{% endif %}
+
 {% if restaurant_list %}
 {% regroup restaurant_list by location as location_list %}
 	{% for location, restaurants in location_list %}
@@ -12,9 +17,25 @@
 		<ul>
 			{% for restaurant in restaurants %}
 			{% if restaurant.website %}
-			<li><a href="{{restaurant.website}}">{{ restaurant.name }}</a></li>
+			<li>
+				<a href="{{restaurant.website}}">{{ restaurant.name }}</a>
+				{% if restaurant.description %} - {{ restaurant.description }}{% endif %}
+				{% if user.is_authenticated %} | <a href="{% url 'info:restaurant_update' restaurant.slug %}">Edit</a> |
+				<span class="text-danger">
+					<a href="{% url 'info:restaurant_delete' restaurant.slug %}">Delete</a>
+				</span>
+				{% endif %}
+			</li>
 			{% else %}
-			<li>{{ restaurant.name }}</li>
+			<li>
+				{{ restaurant.name }}
+				{% if restaurant.description %} - {{ restaurant.description }}{% endif %}
+				{% if user.is_authenticated %} | <a href="{% url 'info:restaurant_update' restaurant.slug %}">Edit</a> |
+				<span class="text-danger">
+					<a href="{% url 'info:restaurant_delete' restaurant.slug %}">Delete</a>
+				</span>
+				{% endif %}
+			</li>
 			{% endif %}
 			{% endfor %}
 		</ul>

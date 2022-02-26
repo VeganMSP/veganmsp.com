@@ -8,7 +8,7 @@
 {% if restaurant_list %}
 {% regroup restaurant_list by location as location_list %}
 	{% for location, restaurants in location_list %}
-		<h2>{{location}}</h2>
+		<h2 id="{{location.slug}}">{{location}}</h2>
 		<ul>
 			{% for restaurant in restaurants %}
 			{% if restaurant.website %}

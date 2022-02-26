@@ -51,9 +51,19 @@ class Address(models.Model):
 class RestaurantLocation(models.Model):
 	address = models.ForeignKey(Address, on_delete=models.CASCADE)
 	phone = models.CharField(max_length=20, blank=True)
+	slug = models.SlugField(
+		max_length=200,
+		editable=False,
+		unique=True
+	)
 
 	def __str__(self):
 		return self.address.city.name
+	
+	def save(self, *args, **kwargs):
+		value = self.address.city.name
+		self.slug = slugify(value, allow_unicode=True)
+		super().save(*args, **kwargs)
 
 
 class Restaurant(models.Model):

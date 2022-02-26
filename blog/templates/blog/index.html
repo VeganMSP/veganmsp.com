@@ -7,6 +7,9 @@
 
 {% block content %}
 <div class="page-content">
+	{% if user.is_authenticated %}
+		<a href="{% url 'blog:post_create' %}">New post</a>
+	{% endif %}
 	{% if post_list %}
 	{% for post in post_list %}
 	<div class="post-stub">

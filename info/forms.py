@@ -1,5 +1,10 @@
 from dal.autocomplete import ModelSelect2
-from django.forms import ModelForm, Textarea
+from django.forms import (
+    BooleanField,
+    ModelForm,
+    Textarea,
+    TextInput,
+)
 
 from .models import (
     Address,
@@ -11,7 +16,7 @@ from .models import (
 )
 
 
-class RestaurantModelForm(ModelForm):
+class BaseRestaurantForm(ModelForm):
     class Meta:
         model = Restaurant
         fields = (
@@ -22,6 +27,11 @@ class RestaurantModelForm(ModelForm):
             'all_vegan',
         )
         widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
             'description': Textarea(
                 attrs={
                     'rows': 15,
@@ -33,11 +43,36 @@ class RestaurantModelForm(ModelForm):
         }
 
 
-class VeganCompanyModelForm(ModelForm):
+class RestaurantAddForm(BaseRestaurantForm):
+    add_another = BooleanField(required=False)
+
+    class Meta:
+        model = BaseRestaurantForm.Meta.model
+        fields = BaseRestaurantForm.Meta.fields + ('add_another',)
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
+            'description': Textarea(
+                attrs={
+                    'rows': 15,
+                    'cols': 84,
+                    'style': 'font-family: monospace'
+                }
+            ),
+            'location': ModelSelect2(url='info:city-autocomplete')
+        }
+
+
+class BaseVeganCompanyForm(ModelForm):
     class Meta:
         model = VeganCompany
         fields = (
-            '__all__'
+            'name',
+            'website',
+            'description',
         )
         widgets = {
             'description': Textarea(
@@ -50,7 +85,29 @@ class VeganCompanyModelForm(ModelForm):
         }
 
 
-class FarmersMarketModelForm(ModelForm):
+class VeganCompanyAddForm(BaseVeganCompanyForm):
+    add_another = BooleanField(required=False)
+
+    class Meta:
+        model = BaseVeganCompanyForm.Meta.model
+        fields = BaseVeganCompanyForm.Meta.fields + ('add_another',)
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
+            'description': Textarea(
+                attrs={
+                    'rows': 15,
+                    'cols': 84,
+                    'style': 'font-family: monospace'
+                }
+            ),
+        }
+
+
+class BaseFarmersMarketForm(ModelForm):
     class Meta:
         model = FarmersMarket
         fields = (
@@ -61,6 +118,28 @@ class FarmersMarketModelForm(ModelForm):
         )
         exclude = ('address',)
         widgets = {
+            'hours': Textarea(
+                attrs={
+                    'rows': 15,
+                    'cols': 64,
+                    'style': 'font-family: monospace'
+                }
+            ),
+        }
+
+
+class FarmersMarketAddForm(BaseFarmersMarketForm):
+    add_another = BooleanField(required=False)
+
+    class Meta:
+        model = BaseFarmersMarketForm.Meta.model
+        fields = BaseFarmersMarketForm.Meta.fields + ('add_another',)
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
             'hours': Textarea(
                 attrs={
                     'rows': 15,
@@ -82,13 +161,37 @@ class AddressModelForm(ModelForm):
         }
 
 
-class LinkModelForm(ModelForm):
+class BaseLinkForm(ModelForm):
     class Meta:
         model = Link
         fields = (
-            '__all__'
+            'name',
+            'website',
+            'description',
         )
         exclude = ('category',)
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
+        }
+
+
+class LinkAddForm(BaseLinkForm):
+    add_another = BooleanField(required=False)
+
+    class Meta:
+        model = BaseLinkForm.Meta.model
+        fields = BaseLinkForm.Meta.fields + ('add_another',)
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'autofocus': True,
+                }
+            ),
+        }
 
 
 class LinkCategoryModelForm(ModelForm):

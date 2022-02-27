@@ -12,10 +12,14 @@ from generic.views import (
 )
 
 from .forms import (
-    FarmersMarketModelForm,
-    LinkModelForm,
-    RestaurantModelForm,
-    VeganCompanyModelForm
+    BaseFarmersMarketForm,
+    BaseLinkForm,
+    BaseRestaurantForm,
+    BaseVeganCompanyForm,
+    FarmersMarketAddForm,
+    LinkAddForm,
+    RestaurantAddForm,
+    VeganCompanyAddForm
 )
 
 from blog.models import Post
@@ -74,7 +78,7 @@ class AllVeganRestaurants(ListView):
 
 
 class RestaurantCreate(BaseAddView):
-    form_class = RestaurantModelForm
+    form_class = RestaurantAddForm
     template_name = 'info/restaurant_form.html'
     redirect_target = 'info:restaurant_list'
 
@@ -95,7 +99,7 @@ class CityAutocomplete(Select2QuerySetView):
 
 class RestaurantUpdate(SlugEditView):
     model_class = Restaurant
-    form_class = RestaurantModelForm
+    form_class = BaseRestaurantForm
     template_name = 'info/restaurant_form.html'
     redirect_target = 'info:restaurant_list'
 
@@ -117,14 +121,14 @@ class ShoppingIndex(TemplateView):
 
 
 class VeganCompanyCreate(BaseAddView):
-    form_class = VeganCompanyModelForm
+    form_class = VeganCompanyAddForm
     template_name = 'info/vegan_company_form.html'
     redirect_target = 'info:shopping_index'
 
 
 class VeganCompanyUpdate(SlugEditView):
     model_class = VeganCompany
-    form_class = VeganCompanyModelForm
+    form_class = BaseVeganCompanyForm
     template_name = 'info/vegan_company_form.html'
     redirect_target = 'info:shopping_index'
 
@@ -136,14 +140,14 @@ class VeganCompanyDelete(SlugDeleteView):
 
 
 class FarmersMarketCreate(BaseAddViewWithAddressForm):
-    form_class = FarmersMarketModelForm
+    form_class = FarmersMarketAddForm
     template_name = 'info/farmers_market_form.html'
     redirect_target = 'info:shopping_index'
 
 
 class FarmersMarketUpdate(SlugEditViewWithAddressForm):
     model_class = FarmersMarket
-    form_class = FarmersMarketModelForm
+    form_class = BaseFarmersMarketForm
     template_name = 'info/farmers_market_form.html'
     redirect_target = 'info:shopping_index'
 
@@ -155,14 +159,14 @@ class FarmersMarketDelete(SlugDeleteView):
 
 
 class LinkCreate(BaseAddViewWithLinkCategoryForm):
-    form_class = LinkModelForm
+    form_class = LinkAddForm
     template_name = 'info/link_form.html'
     redirect_target = 'info:links_index'
 
 
 class LinkUpdate(SlugEditViewWithLinkCategoryForm):
     model_class = Link
-    form_class = LinkModelForm
+    form_class = BaseLinkForm
     template_name = 'info/link_form.html'
     redirect_target = 'info:links_index'
 

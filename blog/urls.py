@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -15,4 +15,8 @@ urlpatterns = [
 		views.category_detail,
 		name='category_detail',
 	),
+	re_path(
+		r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)$',
+		views.PostDetailByDate.as_view()
+	)
 ]

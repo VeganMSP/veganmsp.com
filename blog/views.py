@@ -33,6 +33,24 @@ class PostDetail(DetailView):
 	template_name = 'blog/post_detail.html'
 
 
+class PostDetailByDate(DetailView):
+	template_name = 'blog/post_detail.html'
+
+	def get(self, request, slug, year, month, day, *args, **kwargs):
+		post = Post.objects.get(
+			slug=slug,
+			date_created__year=year,
+			date_created__month=month,
+			date_created__day=day
+		)
+		return render(
+			request,
+			self.template_name,
+			{
+				'object': post
+			})
+
+
 @login_required
 def post_create(request):
 	if request.method == 'POST':

@@ -2,24 +2,42 @@
 
 {% block content %}
 <div class="page-content">
-{% if links_list %}
-{% regroup links_list by category as category_list %}
-{% for category, links in category_list %}
-	{% if category.level == 0 %}
-		<h2 id="{{category.slug}}">{{ category.get_name }}</h2>
-	{% elif category.level == 1 %}
-		<h3 id="{{category.slug}}">{{ category.get_name }}</h3>
-	{% elif category.level == 2 %}
-		<h4 id="{{category.slug}}">{{ category.get_name }}</h4>
+
+	{% if user.is_authenticated %}
+	<a href="{% url 'info:link_create' %}">Add Link</a>
 	{% endif %}
-	<ul>
-		{% for link in links %}
-			<li><a href="{{link.website}}" rel="noopener" target="_blank">{{link}}</a>{% if link.description %} - {{link.description}}{% endif %}</li>
-		{% endfor %}
-	</ul>
-{% endfor %}
-{% else %}
-	<p>There are no links in the database!</p>
-{% endif %}
+
+	{% if links_list %}
+	{% regroup links_list by category as category_list %}
+	{% for category, links in category_list %}
+		{% if category.level == 0 %}
+			<h2 id="{{category.slug}}">{{ category.get_name }}</h2>
+		{% elif category.level == 1 %}
+			<h3 id="{{category.slug}}">{{ category.get_name }}</h3>
+		{% elif category.level == 2 %}
+			<h4 id="{{category.slug}}">{{ category.get_name }}</h4>
+		{% endif %}
+		<ul>
+			{% for link in links %}
+				<li>
+					<a href="{{link.website}}" rel="noopener" target="_blank">
+						{{link}}
+					</a>
+					{% if link.description %} - {{link.description}}{% endif %}
+
+					{% if user.is_authenticated %} | <a href="{% url 'info:link_update' link.slug %}">Edit</a> |
+					<span class="text-danger">
+						<a href="{% url 'info:link_delete' link.slug %}">
+							Delete
+						</a>
+					</span>
+		{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endfor %}
+	{% else %}
+		<p>There are no links in the database!</p>
+	{% endif %}
 </div>
 {% endblock %}

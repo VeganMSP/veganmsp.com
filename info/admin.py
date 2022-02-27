@@ -1,24 +1,29 @@
 from django.contrib import admin
 
 from .models import (
-	Address,
-	City,
-	FarmersMarket,
-	Link,
-	LinkCategory,
-	Restaurant,
-	VeganCompany,
+    Address,
+    City,
+    FarmersMarket,
+    Link,
+    LinkCategory,
+    Restaurant,
+    VeganCompany,
+)
+
+from .forms import (
+    BaseRestaurantForm,
 )
 
 
 class CityAdmin(admin.ModelAdmin):
-	list_display = ('name', 'date_updated', 'date_created')
-	search_fields = ['name', 'description']
+    list_display = ('name', 'date_updated', 'date_created')
+    search_fields = ['name', 'description']
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-	list_display = ('name', 'slug', 'location')
-	search_fields = ['name', 'description']
+    form = BaseRestaurantForm
+    list_display = ('name', 'slug', 'location')
+    search_fields = ['name', 'description']
 
 
 admin.site.register(City, CityAdmin)
@@ -26,9 +31,9 @@ admin.site.register(Restaurant, RestaurantAdmin)
 
 
 class FarmersMarketAdmin(admin.ModelAdmin):
-	list_display = ('name', 'address', 'hours')
-	list_filter = ['address__city__name']
-	search_fields = ['name']
+    list_display = ('name', 'address', 'hours')
+    list_filter = ['address__city__name']
+    search_fields = ['name']
 
 
 admin.site.register(Address)

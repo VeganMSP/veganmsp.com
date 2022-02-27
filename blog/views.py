@@ -1,3 +1,4 @@
+from dal.autocomplete import Select2QuerySetView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView
@@ -11,18 +12,15 @@ class IndexView(ListView):
     template_name = 'blog/index.html'
 
 
-def category_detail(request, category_id):
+def category_detail(request, slug):
     if request.method == 'GET':
-        current_category = Category.objects.get(pk=category_id)
+        current_category = Category.objects.get(slug=slug)
 
-        children = current_category.get_children()
-        ancestors = current_category.get_ancestors()
         posts = current_category.posts.all()
 
         context = {
-            'categories': children,
+
             'current_category': current_category,
-            'ancestors': ancestors,
             'posts': posts,
         }
     return render(request, 'blog/category_detail.html', context)
@@ -34,21 +32,21 @@ class PostDetail(DetailView):
 
 
 class PostDetailByDate(DetailView):
-	template_name = 'blog/post_detail.html'
+    template_name = 'blog/post_detail.html'
 
-	def get(self, request, slug, year, month, day, *args, **kwargs):
-		post = Post.objects.get(
-			slug=slug,
-			date_created__year=year,
-			date_created__month=month,
-			date_created__day=day
-		)
-		return render(
-			request,
-			self.template_name,
-			{
-				'object': post
-			})
+    def get(self, request, year, month, day, slug, *args, **kwargs):
+        post = Post.objects.get(
+            slug=slug,
+            date_created__year=year,
+            date_created__month=month,
+            date_created__day=day
+        )
+        return render(
+            request,
+            self.template_name,
+            {
+                'post': post
+            })
 
 
 @login_required
@@ -82,3 +80,17 @@ def post_delete(request, slug):
         post.delete()
         return redirect('blog:index')
     return render(request, 'blog/post_delete.html', {'post': post})
+
+
+class CategoryAutocomplete(Select2QuerySetView):
+    def get_queryset(self):
+        # Filter out results depending on login state
+        if not self.request.user.is_authenticated:
+            return Category.objects.none()
+
+        qs = Category.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

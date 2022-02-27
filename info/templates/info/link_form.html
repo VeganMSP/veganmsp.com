@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content">
+	<form method="post">
+		{% csrf_token %}
+
+        <h2>Link</h2>
+		{{ form.as_p }}
+
+        <h2>Link Category</h2>
+        {{ link_category_form.as_p }}
+
+		<button type="submit" class="btn btn-primary">Save</button>
+        {% if obj and obj.deletable %}<a href="{% url 'info:link_delete' obj.slug %}"><button type="button" class="text-danger">Delete</button></a>{% endif %}
+	</form>
+</div>
+{% endblock %}

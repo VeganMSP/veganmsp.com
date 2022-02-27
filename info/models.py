@@ -151,6 +151,11 @@ class LinkCategory(MPTTModel, CustomModel):
 
 class Link(CustomModel):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(
+        max_length=200,
+        editable=False,
+        unique=True
+    )
     website = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     category = models.ForeignKey(
@@ -161,3 +166,8 @@ class Link(CustomModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)

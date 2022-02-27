@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
+from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, View
 
 from info.forms import AddressModelForm, LinkCategoryModelForm
@@ -9,8 +8,12 @@ from info.models import LinkCategory
 
 
 class BaseAddView(LoginRequiredMixin, View):
+    add_another = False
+
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
+        form = self.form_class(initial={
+            'add_another': self.add_another,
+        })
         return render(
             request,
             self.template_name,
@@ -21,10 +24,20 @@ class BaseAddView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        try:
+            if request.POST['add_another'] == 'on':
+                self.add_another = True
+        except MultiValueDictKeyError:
+            self.add_another = False
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse(self.redirect_target))
-        form = self.form_class()
+            if self.add_another:
+                pass
+            else:
+                return redirect(self.redirect_target)
+        form = self.form_class(initial={
+            'add_another': self.add_another
+        })
         return render(
             request,
             self.template_name,
@@ -35,8 +48,12 @@ class BaseAddView(LoginRequiredMixin, View):
 
 
 class BaseAddViewWithAddressForm(LoginRequiredMixin, View):
+    add_another = False
+
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
+        form = self.form_class(initial={
+            'add_another': self.add_another,
+        })
         address_form = AddressModelForm(prefix='address')
         return render(
             request,
@@ -50,13 +67,23 @@ class BaseAddViewWithAddressForm(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         address_form = AddressModelForm(request.POST, prefix='address')
+        try:
+            if request.POST['add_another'] == 'on':
+                self.add_another = True
+        except MultiValueDictKeyError:
+            self.add_another = False
         if form.is_valid() and address_form.is_valid():
             address = address_form.save()
             fm = form.save(commit=False)
             fm.address = address
             fm.save()
-            return HttpResponseRedirect(reverse(self.redirect_target))
-        form = self.form_class()
+            if self.add_another:
+                pass
+            else:
+                return redirect(self.redirect_target)
+        form = self.form_class(initial={
+            'add_another': self.add_another,
+        })
         address_form = AddressModelForm(prefix='address')
         return render(
             request,
@@ -69,8 +96,12 @@ class BaseAddViewWithAddressForm(LoginRequiredMixin, View):
 
 
 class BaseAddViewWithLinkCategoryForm(LoginRequiredMixin, View):
+    add_another = False
+
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
+        form = self.form_class(initial={
+            'add_another': self.add_another,
+        })
         link_category_form = LinkCategoryModelForm(prefix='link_category')
         return render(
             request,
@@ -86,6 +117,11 @@ class BaseAddViewWithLinkCategoryForm(LoginRequiredMixin, View):
         link_category_form = LinkCategoryModelForm(
             request.POST, prefix='link_category'
         )
+        try:
+            if request.POST['add_another'] == 'on':
+                self.add_another = True
+        except MultiValueDictKeyError:
+            self.add_another = False
         if form.is_valid() and link_category_form.is_valid():
             try:
                 link_category = LinkCategory.objects.get(
@@ -96,8 +132,13 @@ class BaseAddViewWithLinkCategoryForm(LoginRequiredMixin, View):
             link = form.save(commit=False)
             link.category = link_category
             link.save()
-            return redirect(self.redirect_target)
-        form = self.form_class()
+            if self.add_another:
+                pass
+            else:
+                return redirect(self.redirect_target)
+        form = self.form_class(initial={
+            'add_another': self.add_another
+        })
         link_category_form = LinkCategoryModelForm(prefix='link_category')
         return render(
             request,
@@ -128,7 +169,7 @@ class BaseEditView(LoginRequiredMixin, View):
         form = self.form_class(request.POST or None, instance=obj)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse(self.redirect_target))
+            return redirect(self.redirect_target)
         form = self.form_class()
         return render(
             request,
@@ -238,7 +279,7 @@ class SlugEditView(LoginRequiredMixin, View):
         form = self.form_class(request.POST or None, instance=obj)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse(self.redirect_target))
+            return redirect(self.redirect_target)
         form = self.form_class()
         return render(
             request,
@@ -264,7 +305,7 @@ class BaseDeleteView(LoginRequiredMixin, View):
     def post(self, request, id, *args, **kwargs):
         obj = get_object_or_404(self.model_class, id=id)
         obj.delete()
-        return redirect(reverse(self.redirect_target))
+        return redirect(self.redirect_target)
 
 
 class SlugDeleteView(LoginRequiredMixin, View):
@@ -282,7 +323,7 @@ class SlugDeleteView(LoginRequiredMixin, View):
     def post(self, request, slug, *args, **kwargs):
         obj = get_object_or_404(self.model_class, slug=slug)
         obj.delete()
-        return redirect(reverse(self.redirect_target))
+        return redirect(self.redirect_target)
 
 
 class BaseListView(LoginRequiredMixin, ListView):

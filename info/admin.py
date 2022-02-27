@@ -11,7 +11,7 @@ from .models import (
 )
 
 from .forms import (
-    RestaurantModelForm,
+    BaseRestaurantForm,
 )
 
 
@@ -21,7 +21,7 @@ class CityAdmin(admin.ModelAdmin):
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-    form = RestaurantModelForm
+    form = BaseRestaurantForm
     list_display = ('name', 'slug', 'location')
     search_fields = ['name', 'description']
 

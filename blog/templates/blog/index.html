@@ -17,9 +17,11 @@
 			<span class="date xs-hidden">
 				{{ post.date_created | date:"Y-m-d" }}
 			</span>
-			<a href="{% url 'blog:post_detail' post.slug %}">
+			{% with year=post.date_created.year month=post.date_created|date:"m" day=post.date_created.day %}
+			<a href="{% url 'blog:post_detail_by_date' year month day post.slug %}">
 				{{ post.title }}
 			</a>
+			{% endwith %}
 		</h2>
 		<p class="post-content">{{ post.content | markdown | safe | slice:":300" }}</p>
 	</div>

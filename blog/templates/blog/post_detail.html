@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="page-content">
-	<h1>{% block title %} {{ object.title }} {%endblock title%}</h1>
+	<h1>{% block title %} {{ post.title }} {%endblock title%}</h1>
 	<p class="text-muted">
 		{{ post.get_author }} | {{ post.date_created }} {% if user.is_authenticated %}
 		| <a href="{% url 'blog:post_update' post.slug %}">Edit</a> | <span class="text-danger">
@@ -16,9 +16,9 @@
 	<p class="text-muted">
 		{% if post.category %}
 			Posted in:
-			<a href="{% url 'blog:category_detail' post.category.id %}">{{ post.category.get_name }}</a>
+			<a href="{% url 'blog:category_detail' post.category.slug %}">{{ post.category.get_name }}</a>
 		{% endif %}
 	</p>
-	<p class="post-content">{{object.content | markdown | safe }}</p>
+	<p class="post-content">{{post.content | markdown | safe }}</p>
 </div>
 {% endblock %}

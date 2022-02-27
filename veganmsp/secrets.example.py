@@ -17,3 +17,5 @@ EMAIL_SUBJECT_PREFIX = '[Django] '
 # EMAIL_USE_TLS=True
 # Enable the following if you use SSL (usually port 465)
 # EMAIL_USE_SSL=True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = 'admin@example.com'

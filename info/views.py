@@ -7,10 +7,12 @@ from generic.views import (
     SlugEditView,
     BaseDeleteView,
     SlugDeleteView,
-    BaseListView,
 )
 
-from .forms import RestaurantModelForm
+from .forms import (
+    RestaurantModelForm,
+    VeganCompanyModelForm
+)
 
 from blog.models import Post
 
@@ -67,16 +69,6 @@ class AllVeganRestaurants(ListView):
         return context
 
 
-class ShoppingIndex(TemplateView):
-    template_name = 'info/shopping_index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['farmers_market_list'] = FarmersMarket.objects.order_by('name')
-        context['vegan_com_list'] = VeganCompany.objects.order_by('name')
-        return context
-
-
 class RestaurantCreate(BaseAddView):
     form_class = RestaurantModelForm
     template_name = 'info/restaurant_form.html'
@@ -108,3 +100,32 @@ class RestaurantDelete(SlugDeleteView):
     model_class = Restaurant
     template_name = 'info/restaurant_delete.html'
     redirect_target = 'info:restaurant_list'
+
+
+class ShoppingIndex(TemplateView):
+    template_name = 'info/shopping_index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['farmers_market_list'] = FarmersMarket.objects.order_by('name')
+        context['vegan_com_list'] = VeganCompany.objects.order_by('name')
+        return context
+
+
+class VeganCompanyCreate(BaseAddView):
+    form_class = VeganCompanyModelForm
+    template_name = 'info/vegan_company_form.html'
+    redirect_target = 'info:shopping_index'
+
+
+class VeganCompanyUpdate(SlugEditView):
+    model_class = VeganCompany
+    form_class = VeganCompanyModelForm
+    template_name = 'info/vegan_company_form.html'
+    redirect_target = 'info:shopping_index'
+
+
+class VeganCompanyDelete(SlugDeleteView):
+    model_class = VeganCompany
+    template_name = 'info/vegan_company_delete.html'
+    redirect_target = 'info:shopping_index'

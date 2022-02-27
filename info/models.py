@@ -83,11 +83,20 @@ class FarmersMarket(CustomModel):
 
 class VeganCompany(CustomModel):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(
+        unique=True,
+        editable=False,
+    )
     website = models.CharField(max_length=2000, blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        value = self.name
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "vegan companies"

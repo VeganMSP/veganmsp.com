@@ -5,6 +5,10 @@
 
 <h2>Good Vegan Companies</h2>
 
+{% if user.is_authenticated %}
+	<a href="{% url 'info:vegan_com_create' %}">Add Vegan Company</a>
+{% endif %}
+
 {% if vegan_com_list %}
 	<ul>
 		{% for item in vegan_com_list %}
@@ -14,6 +18,12 @@
 			{{ item.name }}
 			{% endif %}
 			{% if item.description %} - {{ item.description }}{% endif %}
+			{% if user.is_authenticated %} | <a href="{% url 'info:vegan_com_update' item.slug %}">Edit</a> |
+				<span class="text-danger">
+					<a href="{% url 'info:vegan_com_delete' item.slug %}">Delete</a>
+				</span>
+			{% endif %}
+			
 			</li>
 		{% endfor %}
 	</ul>

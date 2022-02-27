@@ -40,6 +40,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'info.apps.InfoConfig',
+    'generic',
 
     'dal',
     'dal_select2',

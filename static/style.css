@@ -75,6 +75,11 @@ li {
 	font-size: 1.75em;
 }
 
+.danger,
+.text-danger {
+	color: red;
+}
+
 .alert, .info {
 	padding: 0.5rem;
 	margin-bottom: 0.5rem;

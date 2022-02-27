@@ -3,8 +3,10 @@ from django.utils.text import slugify
 
 from mptt.models import MPTTModel, TreeForeignKey
 
+from generic.models import CustomModel
 
-class City(models.Model):
+
+class City(CustomModel):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         unique=True,
@@ -25,7 +27,7 @@ class City(models.Model):
         verbose_name_plural = "cities"
 
 
-class Address(models.Model):
+class Address(CustomModel):
     name = models.CharField(max_length=200, blank=True)
     street1 = models.CharField(max_length=200, blank=True)
     street2 = models.CharField(max_length=200, blank=True)
@@ -45,7 +47,7 @@ class Address(models.Model):
         verbose_name_plural = "addresses"
 
 
-class Restaurant(models.Model):
+class Restaurant(CustomModel):
     name = models.CharField(max_length=200)
     location = models.ForeignKey(City, on_delete=models.CASCADE)
     date_created = models.DateTimeField('date_published', auto_now_add=True)
@@ -68,7 +70,7 @@ class Restaurant(models.Model):
         super().save(*args, **kwargs)
 
 
-class FarmersMarket(models.Model):
+class FarmersMarket(CustomModel):
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     hours = models.TextField(blank=True)
     name = models.CharField(max_length=200)
@@ -79,7 +81,7 @@ class FarmersMarket(models.Model):
         return self.name
 
 
-class VeganCompany(models.Model):
+class VeganCompany(CustomModel):
     name = models.CharField(max_length=200)
     website = models.CharField(max_length=2000, blank=True)
     description = models.TextField(blank=True)
@@ -91,7 +93,7 @@ class VeganCompany(models.Model):
         verbose_name_plural = "vegan companies"
 
 
-class LinkCategory(MPTTModel):
+class LinkCategory(MPTTModel, CustomModel):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         unique=True,
@@ -128,7 +130,7 @@ class LinkCategory(MPTTModel):
         super().save(*args, **kwargs)
 
 
-class Link(models.Model):
+class Link(CustomModel):
     name = models.CharField(max_length=200)
     website = models.CharField(max_length=200)
     description = models.TextField(blank=True)

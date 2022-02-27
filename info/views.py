@@ -68,7 +68,7 @@ class AllVeganRestaurants(ListView):
 
 
 class ShoppingIndex(TemplateView):
-    template_name = 'info/shopping.html'
+    template_name = 'info/shopping_index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -45,6 +45,21 @@ urlpatterns = [
         name='vegan_com_delete'
     ),
     path(
+        'farmers-market/add',
+        views.FarmersMarketCreate.as_view(),
+        name='farmers_market_create'
+    ),
+    path(
+        'farmers-market/edit/<slug:slug>',
+        views.FarmersMarketUpdate.as_view(),
+        name='farmers_market_update'
+    ),
+    path(
+        'farmers-market/delete/<slug:slug>',
+        views.FarmersMarketDelete.as_view(),
+        name='farmers_market_delete'
+    ),
+    path(
         'city-autocomplete/',
         views.CityAutocomplete.as_view(create_field='name'),
         name='city-autocomplete'

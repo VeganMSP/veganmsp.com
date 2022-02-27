@@ -3,13 +3,14 @@ from django.views.generic import TemplateView, ListView
 
 from generic.views import (
     BaseAddView,
-    BaseEditView,
+    BaseAddViewWithAddressForm,
     SlugEditView,
-    BaseDeleteView,
+    SlugEditViewWithAddressForm,
     SlugDeleteView,
 )
 
 from .forms import (
+    FarmersMarketModelForm,
     RestaurantModelForm,
     VeganCompanyModelForm
 )
@@ -127,5 +128,24 @@ class VeganCompanyUpdate(SlugEditView):
 
 class VeganCompanyDelete(SlugDeleteView):
     model_class = VeganCompany
+    template_name = 'info/generic_delete.html'
+    redirect_target = 'info:shopping_index'
+
+
+class FarmersMarketCreate(BaseAddViewWithAddressForm):
+    form_class = FarmersMarketModelForm
+    template_name = 'info/farmers_market_form.html'
+    redirect_target = 'info:shopping_index'
+
+
+class FarmersMarketUpdate(SlugEditViewWithAddressForm):
+    model_class = FarmersMarket
+    form_class = FarmersMarketModelForm
+    template_name = 'info/farmers_market_form.html'
+    redirect_target = 'info:shopping_index'
+
+
+class FarmersMarketDelete(SlugDeleteView):
+    model_class = FarmersMarket
     template_name = 'info/generic_delete.html'
     redirect_target = 'info:shopping_index'

@@ -32,10 +32,25 @@
 {% endif %}
 
 <h2>Farmers Markets</h2>
+{% if user.is_authenticated %}
+	<a href="{% url 'info:farmers_market_create' %}">Add Farmers Market</a>
+{% endif %}
 {% if farmers_market_list %}
 	<ul>
 		{% for market in farmers_market_list %}
-			<li><a href="">{{ market.name }}</a> - {{ market.address }}</li>
+			<li>
+				{% if market.website %}
+				<a href="">{{ market.name }}</a>
+				{% else %}
+				{{ market.name }}
+				{% endif %}
+				- {{ market.address }}
+				{% if user.is_authenticated %} | <a href="{% url 'info:farmers_market_update' market.slug %}">Edit</a> |
+					<span class="text-danger">
+						<a href="{% url 'info:farmers_market_delete' market.slug %}">Delete</a>
+					</span>
+				{% endif %}
+			</li>
 		{% endfor %}
 	</ul>
 {% else %}

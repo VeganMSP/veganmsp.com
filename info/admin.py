@@ -6,9 +6,7 @@ from .models import (
 	FarmersMarket,
 	Link,
 	LinkCategory,
-	Neighborhood,
 	Restaurant,
-	RestaurantLocation,
 	VeganCompany,
 )
 
@@ -18,20 +16,12 @@ class CityAdmin(admin.ModelAdmin):
 	search_fields = ['name', 'description']
 
 
-class NeighborhoodAdmin(admin.ModelAdmin):
-	list_display = ('name', 'city', 'date_updated', 'date_created')
-	list_filter = ['city']
-	search_fields = ['name', 'city__name']
-
-
 class RestaurantAdmin(admin.ModelAdmin):
 	list_display = ('name', 'slug', 'location')
 	search_fields = ['name', 'description']
 
 
-admin.site.register(RestaurantLocation)
 admin.site.register(City, CityAdmin)
-admin.site.register(Neighborhood, NeighborhoodAdmin)
 admin.site.register(Restaurant, RestaurantAdmin)
 
 

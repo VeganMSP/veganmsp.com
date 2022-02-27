@@ -6,26 +6,23 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class City(models.Model):
 	name = models.CharField(max_length=200)
-	description = models.TextField(blank=True)
+	slug = models.SlugField(
+		unique=True,
+		editable=False,
+	)
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.name
+	
+	def save(self, *args, **kwargs):
+		value = self.name
+		self.slug = slugify(value, allow_unicode=True)
+		super().save(*args, **kwargs)
 
 	class Meta:
 		verbose_name_plural = "cities"
-
-
-class Neighborhood(models.Model):
-	city = models.ForeignKey(City, on_delete=models.CASCADE)
-	date_created = models.DateTimeField(auto_now_add=True)
-	date_updated = models.DateTimeField(auto_now=True)
-	description = models.TextField(blank=True)
-	name = models.CharField(max_length=200)
-
-	def __str__(self):
-		return self.name
 
 
 class Address(models.Model):
@@ -48,27 +45,9 @@ class Address(models.Model):
 		verbose_name_plural = "addresses"
 
 
-class RestaurantLocation(models.Model):
-	address = models.ForeignKey(Address, on_delete=models.CASCADE)
-	phone = models.CharField(max_length=20, blank=True)
-	slug = models.SlugField(
-		max_length=200,
-		editable=False,
-		unique=True
-	)
-
-	def __str__(self):
-		return self.address.city.name
-	
-	def save(self, *args, **kwargs):
-		value = self.address.city.name
-		self.slug = slugify(value, allow_unicode=True)
-		super().save(*args, **kwargs)
-
-
 class Restaurant(models.Model):
 	name = models.CharField(max_length=200)
-	location = models.ForeignKey(RestaurantLocation, on_delete=models.CASCADE)
+	location = models.ForeignKey(City, on_delete=models.CASCADE)
 	date_created = models.DateTimeField('date_published', auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
 	slug = models.SlugField(

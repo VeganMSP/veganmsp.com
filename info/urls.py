@@ -28,8 +28,22 @@ urlpatterns = [
         'restaurant/delete/<slug:slug>', views.RestaurantDelete.as_view(),
         name='restaurant_delete'
     ),
-    path('shopping/', views.ShoppingIndex.as_view(), name='shopping'),
-
+    path('shopping/', views.ShoppingIndex.as_view(), name='shopping_index'),
+    path(
+        'vegan-company/add',
+        views.VeganCompanyCreate.as_view(),
+        name='vegan_com_create'
+    ),
+    path(
+        'vegan-company/edit/<slug:slug>',
+        views.VeganCompanyUpdate.as_view(),
+        name='vegan_com_update'
+    ),
+    path(
+        'vegan-company/delete/<slug:slug>',
+        views.VeganCompanyDelete.as_view(),
+        name='vegan_com_delete'
+    ),
     path(
         'city-autocomplete/',
         views.CityAutocomplete.as_view(create_field='name'),

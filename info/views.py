@@ -127,5 +127,5 @@ class VeganCompanyUpdate(SlugEditView):
 
 class VeganCompanyDelete(SlugDeleteView):
     model_class = VeganCompany
-    template_name = 'info/vegan_company_delete.html'
+    template_name = 'info/generic_delete.html'
     redirect_target = 'info:shopping_index'

@@ -1,9 +1,11 @@
 asgiref==3.5.0
 Django==4.0.2
+django-autocomplete-light==3.9.1
 django-extensions==3.1.5
 django-js-asset==2.0.0
 django-mptt==0.13.4
 markdown2==2.4.2
 psycopg2-binary==2.9.3
 pytz==2021.3
+six==1.16.0
 sqlparse==0.4.2

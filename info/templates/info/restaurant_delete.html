@@ -6,10 +6,10 @@
 		{% csrf_token %}
 		<div class="form-row">
 			<div class="alert alert-warning">
-				Are you sure you want to delete {{ restaurant }}?
+				Are you sure you want to delete {{ obj }}?
 			</div>
 		</div>
-		<button type="submit" class="btn btn-danger">Delete restaurant "{{ restaurant }}"</button>
+		<button type="submit" class="btn btn-danger">Delete restaurant "{{ obj }}"</button>
 	</form>
 </div>
 {% endblock %}

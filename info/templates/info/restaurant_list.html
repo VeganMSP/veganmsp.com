@@ -18,7 +18,7 @@
 			{% for restaurant in restaurants %}
 			{% if restaurant.website %}
 			<li>
-				<a href="{{restaurant.website}}">{{ restaurant.name }}</a>
+				<a target="_blank" href="{{restaurant.website}}">{{ restaurant.name }}</a>
 				{% if restaurant.description %} - {{ restaurant.description }}{% endif %}
 				{% if user.is_authenticated %} | <a href="{% url 'info:restaurant_update' restaurant.slug %}">Edit</a> |
 				<span class="text-danger">

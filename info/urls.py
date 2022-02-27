@@ -28,7 +28,8 @@ urlpatterns = [
     path('shopping/', views.ShoppingIndex.as_view(), name='shopping'),
 
     path(
-        'city-autocomplete/', views.CityAutocomplete.as_view(),
+        'city-autocomplete/',
+        views.CityAutocomplete.as_view(create_field='name'),
         name='city-autocomplete'
     ),
 ]

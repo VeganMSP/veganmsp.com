@@ -4,6 +4,8 @@ from django.forms import ModelForm, Textarea
 from .models import (
     Address,
     FarmersMarket,
+    Link,
+    LinkCategory,
     Restaurant,
     VeganCompany
 )
@@ -78,3 +80,20 @@ class AddressModelForm(ModelForm):
         widgets = {
             'city': ModelSelect2(url='info:city-autocomplete')
         }
+
+
+class LinkModelForm(ModelForm):
+    class Meta:
+        model = Link
+        fields = (
+            '__all__'
+        )
+        exclude = ('category',)
+
+
+class LinkCategoryModelForm(ModelForm):
+    class Meta:
+        model = LinkCategory
+        fields = (
+            '__all__'
+        )

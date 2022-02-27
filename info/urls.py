@@ -6,7 +6,7 @@ app_name = 'info'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('about/', views.AboutView.as_view(), name='about'),
-    path('links/', views.LinkIndex.as_view(), name='links'),
+    path('links/', views.LinkIndex.as_view(), name='links_index'),
     path(
         'restaurants/', views.RestaurantIndex.as_view(),
         name='restaurant_list'
@@ -58,6 +58,21 @@ urlpatterns = [
         'farmers-market/delete/<slug:slug>',
         views.FarmersMarketDelete.as_view(),
         name='farmers_market_delete'
+    ),
+    path(
+        'link/add',
+        views.LinkCreate.as_view(),
+        name='link_create'
+    ),
+    path(
+        'link/edit/<slug:slug>',
+        views.LinkUpdate.as_view(),
+        name='link_update'
+    ),
+    path(
+        'link/delete/<slug:slug>',
+        views.LinkDelete.as_view(),
+        name='link_delete'
     ),
     path(
         'city-autocomplete/',

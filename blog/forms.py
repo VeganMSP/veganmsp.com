@@ -10,6 +10,7 @@ class PostModelForm(ModelForm):
 			'title',
 			'content',
 			'status',
+			'category',
 		)
 		widgets = {
 			'content': Textarea(

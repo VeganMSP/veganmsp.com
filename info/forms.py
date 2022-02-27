@@ -2,6 +2,8 @@ from dal.autocomplete import ModelSelect2
 from django.forms import ModelForm, Textarea
 
 from .models import (
+    Address,
+    FarmersMarket,
     Restaurant,
     VeganCompany
 )
@@ -43,4 +45,36 @@ class VeganCompanyModelForm(ModelForm):
                     'style': 'font-family: monospace'
                 }
             ),
+        }
+
+
+class FarmersMarketModelForm(ModelForm):
+    class Meta:
+        model = FarmersMarket
+        fields = (
+            'name',
+            'website',
+            'phone',
+            'hours',
+        )
+        exclude = ('address',)
+        widgets = {
+            'hours': Textarea(
+                attrs={
+                    'rows': 15,
+                    'cols': 64,
+                    'style': 'font-family: monospace'
+                }
+            ),
+        }
+
+
+class AddressModelForm(ModelForm):
+    class Meta:
+        model = Address
+        fields = (
+            '__all__'
+        )
+        widgets = {
+            'city': ModelSelect2(url='info:city-autocomplete')
         }

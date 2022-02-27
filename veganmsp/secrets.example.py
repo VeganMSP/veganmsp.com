@@ -1,3 +1,5 @@
+# Database Settings
+#
 DATABASE_NAME = 'django'
 DATABASE_USER = 'django'
 DATABASE_PASS = ''

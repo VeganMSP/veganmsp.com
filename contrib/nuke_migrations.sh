@@ -13,10 +13,10 @@ find ./info/migrations -name '*.py' -not -name '__init__.py' -delete
 find ./info/migrations -name '*.pyc' -delete
 
 echo 'Dropping and recreating database...'
-psql -d postgres -c 'DROP DATABASE django;'
+psql -d postgres -c 'DROP DATABASE django_veganmsp;'
 
 echo 'Recreating database...'
-psql -d postgres -c $'CREATE DATABASE django WITH ENCODING = \'UTF8\' OWNER django;'
+psql -d postgres -c $'CREATE DATABASE django_veganmsp WITH ENCODING = \'UTF8\' OWNER django;'
 
 echo 'Recreating migrations...'
 source ./venv/bin/activate

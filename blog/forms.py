@@ -1,10 +1,12 @@
 from dal.autocomplete import ModelSelect2
-from django.forms import ModelForm, Textarea
+from django.forms import Textarea
+
+from generic.forms import CustomForm
 
 from .models import Post
 
 
-class PostModelForm(ModelForm):
+class PostModelForm(CustomForm):
     class Meta:
         model = Post
         fields = (

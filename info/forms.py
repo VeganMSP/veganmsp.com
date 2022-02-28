@@ -1,10 +1,11 @@
 from dal.autocomplete import ModelSelect2
 from django.forms import (
     BooleanField,
-    ModelForm,
     Textarea,
     TextInput,
 )
+
+from generic.forms import CustomForm
 
 from .models import (
     Address,
@@ -16,7 +17,8 @@ from .models import (
 )
 
 
-class BaseRestaurantForm(ModelForm):
+class BaseRestaurantForm(CustomForm):
+
     class Meta:
         model = Restaurant
         fields = (
@@ -66,7 +68,7 @@ class RestaurantAddForm(BaseRestaurantForm):
         }
 
 
-class BaseVeganCompanyForm(ModelForm):
+class BaseVeganCompanyForm(CustomForm):
     class Meta:
         model = VeganCompany
         fields = (
@@ -107,7 +109,7 @@ class VeganCompanyAddForm(BaseVeganCompanyForm):
         }
 
 
-class BaseFarmersMarketForm(ModelForm):
+class BaseFarmersMarketForm(CustomForm):
     class Meta:
         model = FarmersMarket
         fields = (
@@ -150,7 +152,7 @@ class FarmersMarketAddForm(BaseFarmersMarketForm):
         }
 
 
-class AddressModelForm(ModelForm):
+class AddressModelForm(CustomForm):
     class Meta:
         model = Address
         fields = (
@@ -161,7 +163,7 @@ class AddressModelForm(ModelForm):
         }
 
 
-class BaseLinkForm(ModelForm):
+class BaseLinkForm(CustomForm):
     class Meta:
         model = Link
         fields = (
@@ -194,7 +196,7 @@ class LinkAddForm(BaseLinkForm):
         }
 
 
-class LinkCategoryModelForm(ModelForm):
+class LinkCategoryModelForm(CustomForm):
     class Meta:
         model = LinkCategory
         fields = (

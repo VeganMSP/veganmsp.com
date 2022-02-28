@@ -2,15 +2,20 @@
 {% load static %}
 
 {% block content %}
-<div class="page-content">
+{% if not obj %}
+<h1>Add Blog Post</h1>
+{% else %}
+<h1>Edit Blog Post</h1>
+{% endif %}
+
 	<form method="post">
 		{% csrf_token %}
 
-		{{ form.as_p }}
+		{{ form }}
 
 		<button type="submit" class="btn btn-primary">Post</button>
 	</form>
-</div>
+
 <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 
 {{ form.media }}

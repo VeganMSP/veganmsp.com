@@ -42,7 +42,7 @@ class Post(models.Model):
     )
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField()
-    content = models.TextField()
+    content = models.TextField(help_text="Markdown allowed")
     category = models.ForeignKey(
         Category,
         related_name='posts',

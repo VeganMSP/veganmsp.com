@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="page-content">
-
 <h1>Good Vegan Companies</h1>
 
 {% if user.is_authenticated %}
@@ -56,5 +54,4 @@
 {% else %}
 	<p>No farmers markets in the database.</p>
 {% endif %}
-</div>
 {% endblock %}

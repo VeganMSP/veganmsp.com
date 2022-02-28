@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="page-content">
 <h1>Groups & Links</h1>
 
 	{% if user.is_authenticated %}
@@ -40,5 +39,4 @@
 	{% else %}
 		<p>There are no links in the database!</p>
 	{% endif %}
-</div>
 {% endblock %}

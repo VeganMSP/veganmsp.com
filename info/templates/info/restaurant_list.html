@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="page-content">
 <h1 class="page-title">Restaurants</h1>
 
 {% if user.is_authenticated %}
@@ -41,5 +40,4 @@
 {% else %}
 	<p>No restaurants in the database!</p>
 {% endif %}
-</div>
 {% endblock %}

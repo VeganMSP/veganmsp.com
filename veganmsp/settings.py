@@ -104,6 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': DATABASE_NAME,  # noqa: F405
         'USER': DATABASE_USER,  # noqa: F405
+        'PASSWORD': DATABASE_PASS,  # noqa: F405
         'HOST': DATABASE_HOST,  # noqa: F405
         'PORT': DATABASE_PORT,  # noqa: F405
     }

@@ -6,15 +6,15 @@ import markdown2 as md
 register = template.Library()
 
 MARKDOWN_EXTRAS = [
-	'fenced-code-blocks',
-	'tables',
-	'footnotes',
-	'header-ids',
-	'strike',
+    'fenced-code-blocks',
+    'tables',
+    'footnotes',
+    'header-ids',
+    'strike',
 ]
 
 
 @register.filter()
 @stringfilter
 def markdown(value):
-	return md.markdown(value, extras=MARKDOWN_EXTRAS)
+    return md.markdown(value, extras=MARKDOWN_EXTRAS)

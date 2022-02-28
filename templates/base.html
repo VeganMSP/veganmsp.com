@@ -15,7 +15,7 @@
 	<header class="flex-wrap align-items-center justify-content-center mb-4 border-bottom bg-light">
 		<div class="container mt-3">
 			<div class="row align-items-center">
-				<div class="col">
+				<div class="col-sm-4">
 					<div class="row">
 					<a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" href="/">
 						<span class="fs-3">
@@ -60,11 +60,11 @@
 	<footer class="footer border-top mt-auto py-3 bg-light text-muted">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col">
+				<div class="col-md">
 					{% include "includes/_site-bio.html" %}
 				</div>
 
-				<div class="col text-end">
+				<div class="col-md text-end">
 					{% include "includes/_licenses.html" %}
 
 					{% if not user.is_authenticated %}

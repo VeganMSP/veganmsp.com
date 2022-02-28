@@ -3,6 +3,12 @@
 
 {% block content %}
 <div class="page-content">
+{% if not obj %}
+<h1>Add Vegan Company</h1>
+{% else %}
+<h1>Edit Vegan Company</h1>
+{% endif %}
+
 	<form method="post">
 		{% csrf_token %}
 

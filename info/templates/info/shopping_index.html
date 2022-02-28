@@ -3,7 +3,7 @@
 {% block content %}
 <div class="page-content">
 
-<h2>Good Vegan Companies</h2>
+<h1>Good Vegan Companies</h1>
 
 {% if user.is_authenticated %}
 	<a href="{% url 'info:vegan_com_create' %}">Add Vegan Company</a>
@@ -31,7 +31,7 @@
 	<p>No shopping in the database!</p>
 {% endif %}
 
-<h2>Farmers Markets</h2>
+<h1>Farmers Markets</h1>
 {% if user.is_authenticated %}
 	<a href="{% url 'info:farmers_market_create' %}">Add Farmers Market</a>
 {% endif %}

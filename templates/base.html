@@ -24,7 +24,7 @@
 					</a>
 					</div>
 					<div class="row">
-						<span class="text-muted">
+						<span class="text-muted fs-6">
 							Just another vegan information site.
 						</span>
 					</div>
@@ -49,22 +49,22 @@
 		</div>
 	</header>
 
-	<main class="flex-shrink-0">
+	<main class="flex-shrink-0 pb-3">
 		<div class="container">
-			<div class="content">
+			<div class="content mx-auto w-75">
 				{% block content %}{% endblock %}
 			</div>
 		</div>
 	</main>
 
-	<footer class="footer border-top mt-auto py-3 bg-light text-muted">
+	<footer class="footer border-top fs-7 mt-auto py-3 bg-light text-muted">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-md">
+				<div class="col-sm-4">
 					{% include "includes/_site-bio.html" %}
 				</div>
 
-				<div class="col-md text-end">
+				<div class="col text-xs-start text-sm-end">
 					{% include "includes/_licenses.html" %}
 
 					{% if not user.is_authenticated %}

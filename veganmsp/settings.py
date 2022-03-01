@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
 
     'dal',
     'dal_select2',
+
+    'sass_processor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,6 +95,21 @@ FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / '_static'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SASS_PRECISION = 8
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'static/bootstrap/scss'),
 ]
 
 WSGI_APPLICATION = 'veganmsp.wsgi.application'

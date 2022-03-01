@@ -1,8 +1,14 @@
 # Ignore secrets
 veganmsp/secrets.py
 
+# Ignore _static
+_static
+
 # Ignore db_graph
 db_graph.png
+
+# Ignore Apples
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

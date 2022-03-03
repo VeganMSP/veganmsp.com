@@ -2,14 +2,19 @@
 {% load static %}
 
 {% block content %}
-<div class="page-content">
+{% if not obj %}
+<h1>Add Vegan Company</h1>
+{% else %}
+<h1>Edit Vegan Company</h1>
+{% endif %}
+
 	<form method="post">
 		{% csrf_token %}
 
-		{{ form.as_p }}
+		{{ form }}
 
 		<button type="submit" class="btn btn-primary">Save</button>
         {% if obj and obj.deletable %}<a href="{% url 'info:vegan_com_delete' obj.slug %}"><button type="button" class="text-danger">Delete</button></a>{% endif %}
 	</form>
-</div>
+
 {% endblock %}

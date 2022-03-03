@@ -6,7 +6,6 @@
 {% block page_title %}Blog{% endblock %}
 
 {% block content %}
-<div class="page-content">
 	{% if user.is_authenticated %}
 		<a href="{% url 'blog:post_create' %}">New post</a>
 	{% endif %}
@@ -31,5 +30,4 @@
 			There are no posts on the blog!
 		</p>
 	{% endif %}
-</div>
 {% endblock %}

@@ -1,32 +1,28 @@
-<div class="navigation">
-  <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem">
-      <a href="/">Home</a>
-    </li>
-    <li class="nav-restaurants" role="menuitem">
-      <a class="page-link" href="{% url 'info:restaurant_list' %}" target="_self">
-        Restaurants
-      </a>
-    </li>
-    <li class="nav-shopping" role="menuitem">
-      <a class="page-link" href="{% url 'info:shopping_index' %}" target="_self">
-        Shopping
-      </a>
-    </li>
-    <li class="nav-links" role="menuitem">
-      <a class="page-link" href="{% url 'info:links_index' %}" target="_self">
-        Groups & Links
-      </a>
-    </li>
-    <li class="nav-blog" role="menuitem">
-      <a class="page-link" href="{% url 'blog:index' %}" target="_self">
-        Blog
-      </a>
-    </li>
-    <li class="nav-about" role="menuitem">
-      <a class="page-link" href="{% url 'info:about' %}" target="_self">
-        About
-      </a>
-    </li>
-  </ul>
-</div>
+<li>
+  <a class="nav-link px-2" href="/">Home</a>
+</li>
+<li>
+  <a class="nav-link px-2" href="{% url 'info:restaurant_list' %}" target="_self">
+    Restaurants
+  </a>
+</li>
+<li>
+  <a class="nav-link px-2" href="{% url 'info:shopping_index' %}" target="_self">
+    Shopping
+  </a>
+</li>
+<li>
+  <a class="nav-link px-2" href="{% url 'info:links_index' %}" target="_self">
+    Groups & Links
+  </a>
+</li>
+<li>
+  <a class="nav-link px-2" href="{% url 'blog:index' %}" target="_self">
+    Blog
+  </a>
+</li>
+<li>
+  <a class="nav-link px-2" href="{% url 'info:about' %}" target="_self">
+    About
+  </a>
+</li>

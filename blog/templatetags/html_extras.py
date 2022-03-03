@@ -8,4 +8,4 @@ register = template.Library()
 @register.filter()
 @stringfilter
 def html_arrows(value):
-	return value.replace("->", '&raquo;')
+    return value.replace("->", '&raquo;')

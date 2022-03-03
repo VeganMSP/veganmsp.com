@@ -10,9 +10,9 @@ urlpatterns = [
         views.CategoryAutocomplete.as_view(create_field='name'),
         name='category-autocomplete'
     ),
-    path('_c/', views.post_create, name='post_create'),
-    path('_u/<slug:slug>/', views.post_update, name='post_update'),
-    path('_d/<slug:slug>/', views.post_delete, name='post_delete'),
+    path('add/', views.post_create, name='post_create'),
+    path('edit/<slug:slug>/', views.post_update, name='post_update'),
+    path('delete/<slug:slug>/', views.post_delete, name='post_delete'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 
     path(

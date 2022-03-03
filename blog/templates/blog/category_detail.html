@@ -3,12 +3,10 @@
 {% load html_extras %}
 
 {% block content %}
-<div class="page-content">
-	<h2>{{current_category | html_arrows | safe}}</h2>
-	{% if posts %}
-		{% for post in posts %}
-			{{post.date_created | date:"Y-m-d"}} <a href="{% url 'blog:post_detail' post.slug %}">{{post}}</a>
-		{% endfor %}
-	{% endif %}
-</div>
+<h2>{{current_category | html_arrows | safe}}</h2>
+{% if posts %}
+	{% for post in posts %}
+		{{post.date_created | date:"Y-m-d"}} <a href="{% url 'blog:post_detail' post.slug %}">{{post}}</a>
+	{% endfor %}
+{% endif %}
 {% endblock %}

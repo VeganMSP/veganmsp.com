@@ -4,8 +4,8 @@ from .markdown_extras import markdown
 
 
 class MarkdownTestCase(TestCase):
-	def test_markdown(self):
-		markdown_text = """# This is a heading.
+    def test_markdown(self):
+        markdown_text = """# This is a heading.
 
 Here we have a paragraph. It's just two lines.[^1]
 
@@ -16,7 +16,7 @@ import django
 That was a code block.
 
 [^1]: Depends on how you count, I guess."""
-		expected_value = """<h1 id="this-is-a-heading">This is a heading.</h1>
+        expected_value = """<h1 id="this-is-a-heading">This is a heading.</h1>
 
 <p>Here we have a paragraph. It's just two lines.<sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup></p>
 
@@ -34,4 +34,4 @@ That was a code block.
 </ol>
 </div>
 """
-		self.assertEqual(markdown(markdown_text), expected_value)
+        self.assertEqual(markdown(markdown_text), expected_value)

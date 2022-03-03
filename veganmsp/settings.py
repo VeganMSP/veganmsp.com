@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 
 
@@ -52,6 +54,8 @@ INSTALLED_APPS = [
 
     'invitations',
 
+    'sass_processor',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django.forms',
 
     'django_extensions',
     'mptt',
@@ -94,8 +99,25 @@ TEMPLATES = [
     },
 ]
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / '_static'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SASS_PRECISION = 8
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'static/bootstrap/scss'),
 ]
 
 WSGI_APPLICATION = 'veganmsp.wsgi.application'
@@ -109,6 +131,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': DATABASE_NAME,  # noqa: F405
         'USER': DATABASE_USER,  # noqa: F405
+        'PASSWORD': DATABASE_PASS,  # noqa: F405
         'HOST': DATABASE_HOST,  # noqa: F405
         'PORT': DATABASE_PORT,  # noqa: F405
     }

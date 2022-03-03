@@ -1,0 +1,29 @@
+{% if errors %}
+<div class="row mb-3">
+    {{ errors }}
+    {% if not fields %}
+        {% for field in hidden_fields %}{{ field }}{% endfor %}
+    {% endif %}
+</div>
+{% endif %}
+{% for field, errors in fields %}
+<div class="row mb-3 {% with classes=field.css_classes %}{% if classes %} class={{ classes }}{% endif %}{% endwith %}">
+    <div class="col-sm-2 col-form-label">
+      {% if field.label %}{{ field.label_tag }}{% endif %}
+      {% if field.help_text %}
+        <br>
+        <span class="text-muted">{{ field.help_text|safe }}</span>
+      {% endif %}
+    </div>
+    <div class="col-sm-5">
+      {{ errors }}
+      {{ field }}
+      {% if forloop.last %}
+        {% for field in hidden_fields %}{{ field }}{% endfor %}
+      {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% if not fields and not errors %}
+  {% for field in hidden_fields %}{{ field }}{% endfor %}
+{% endif %}

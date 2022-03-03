@@ -4,7 +4,6 @@
 {% load html_extras %}
 
 {% block content %}
-<div class="page-content">
 	<h1>{% block title %} {{ post.title }} {%endblock title%}</h1>
 	<p class="text-muted">
 		{{ post.get_author }} | {{ post.date_created }} {% if user.is_authenticated %}
@@ -20,5 +19,4 @@
 		{% endif %}
 	</p>
 	<p class="post-content">{{post.content | markdown | safe }}</p>
-</div>
 {% endblock %}

@@ -1,3 +1,0 @@
--r requirements.txt
-coverage==6.3.2
-pygraphviz==1.9

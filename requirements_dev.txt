@@ -1,5 +1,0 @@
--r requirements.txt
-coverage==6.3.2
-django-libsass==0.1
-django-sass-processor==1.1
-pygraphviz==1.9

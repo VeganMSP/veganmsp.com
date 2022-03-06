@@ -18,7 +18,7 @@ from pathlib import Path
 try:
     from .secrets import *  # noqa:F403
 except ImportError:
-    raise Exception("A secrets.py is required to run this project.")
+    print("A secrets.py is required to run this project.")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

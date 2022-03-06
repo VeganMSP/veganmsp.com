@@ -14,11 +14,20 @@ import os
 
 from pathlib import Path
 
-
+imported = False
 try:
     from .secrets import *  # noqa:F403
+    imported = True
 except ImportError:
     print("A secrets.py is required to run this project.")
+
+if not imported:
+    print("secrets.py not imported")
+    DATABASE_NAME = 'django'
+    DATABASE_USER = 'django'
+    DATABASE_PASS = ''
+    DATABASE_HOST = '127.0.0.1'
+    DATABASE_PORT = '5432'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

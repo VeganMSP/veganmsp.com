@@ -23,6 +23,7 @@ except ImportError:
 
 if not imported:
     print("secrets.py not imported")
+    APP_SECRET = 'secret'
     DATABASE_NAME = 'django'
     DATABASE_USER = 'django'
     DATABASE_PASS = ''
@@ -38,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = APP_SECRET  # noqa: F405
+SECRET_KEY = APP_SECRET  # noqa: F405
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

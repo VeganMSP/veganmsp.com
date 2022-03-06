@@ -2,9 +2,7 @@ from django.test import TestCase
 
 from info.models import (
     City,
-    Neighborhood,
     Address,
-    RestaurantLocation,
     Restaurant,
     FarmersMarket,
     VeganCompany,

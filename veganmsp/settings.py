@@ -14,14 +14,13 @@ import os
 
 from pathlib import Path
 
-imported = False
-try:
-    from .secrets import *  # noqa:F403
-    imported = True
-except ImportError:
-    print("A secrets.py is required to run this project.")
-
-if not imported:
+if os.path.exists("veganmsp/secrets.py"):
+    try:
+        from .secrets import *  # noqa: F401, F403
+        imported = True
+    except ImportError:
+        print("A secrets.py is required to run this project.")
+else:
     print("secrets.py not imported")
     APP_SECRET = 'secret'
     DATABASE_NAME = 'django'

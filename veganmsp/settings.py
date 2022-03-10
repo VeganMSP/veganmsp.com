@@ -146,6 +146,7 @@ AUTHENTICATION_BACKENDS = [
 
 INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
 INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

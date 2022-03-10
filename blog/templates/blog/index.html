@@ -12,7 +12,7 @@
 	{% if post_list %}
 	{% for post in post_list %}
 	<div class="post-stub">
-		<h2 class="post-title">
+		<h3 class="post-title">
 			<span class="date xs-hidden">
 				{{ post.date_created | date:"Y-m-d" }}
 			</span>
@@ -21,7 +21,7 @@
 				{{ post.title }}
 			</a>
 			{% endwith %}
-		</h2>
+		</h3>
 		<p class="post-content">{{ post.content | markdown | safe | slice:":300" }}</p>
 	</div>
 	{% endfor %}

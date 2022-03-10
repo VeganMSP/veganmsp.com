@@ -4,7 +4,7 @@
 	{% for post in recent_posts_list %}
 	<div class="post-stub">
 		{{ post.date_created | date:"Y-m-d" }}
-		{% with year=post.date_created.year month=post.date_created|date:"m" day=post.date_created.day %}
+		{% with year=post.date_created.year month=post.date_created|date:"m" day=post.date_created|date:"d" %}
 		<a class="recent-post-link" href="{% url 'blog:post_detail_by_date' year month day post.slug %}">
 			{{ post.title }}
 		</a>

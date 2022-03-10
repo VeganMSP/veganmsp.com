@@ -36,6 +36,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -47,13 +48,20 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'invitations',
+
     'sass_processor',
 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.forms',
 
@@ -129,6 +137,16 @@ DATABASES = {
     }
 }
 
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+INVITATIONS_ADAPTER = ACCOUNT_ADAPTER
+INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

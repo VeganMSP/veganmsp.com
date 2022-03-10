@@ -16,7 +16,7 @@
 			<span class="date xs-hidden">
 				{{ post.date_created | date:"Y-m-d" }}
 			</span>
-			{% with year=post.date_created.year month=post.date_created|date:"m" day=post.date_created.day %}
+			{% with year=post.date_created.year month=post.date_created|date:"m" day=post.date_created|date:"d" %}
 			<a href="{% url 'blog:post_detail_by_date' year month day post.slug %}">
 				{{ post.title }}
 			</a>

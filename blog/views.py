@@ -61,7 +61,7 @@ def post_create(request):
                 'blog:post_detail_by_date',
                 post.date_created.year,
                 post.date_created.strftime("%m"),
-                post.date_created.day,
+                post.date_created.strftime("%d"),
                 post.slug
             )
     form = PostModelForm()
@@ -79,7 +79,7 @@ def post_update(request, slug):
             'blog:post_detail_by_date',
             post.date_created.year,
             post.date_created.strftime("%m"),
-            post.date_created.day,
+            post.date_created.strftime("%d"),
             post.slug
         )
 

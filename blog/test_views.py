@@ -1,3 +1,8 @@
+# pylint: disable=missing-module-docstring,
+# pylint: disable=missing-class-docstring,
+# pylint: disable=missing-function-docstring
+# pylint: disable=invalid-name
+
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -30,13 +35,13 @@ class CategoryDetailViewTest(TestCase):
 
     def test_view_url_exists_at_desired_location(self):
         category = self.category
-        response = self.client.get(f'/blog/category/{category.id}/')
+        response = self.client.get(f'/blog/category/{category.slug}/')
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
         category = self.category
         response = self.client.get(
-            reverse('blog:category_detail', args=[category.id])
+            reverse('blog:category_detail', args=[category.slug])
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'blog/category_detail.html')
@@ -63,12 +68,12 @@ class PostCreateViewTest(TestCase):
         cls.authenticated_client = authenticated_client
 
     def test_view_url_unauthenticated(self):
-        url = '/blog/_c/'
+        url = '/blog/add/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
     def test_view_url_exists_at_desired_location(self):
-        response = self.authenticated_client.get('/blog/_c/')
+        response = self.authenticated_client.get('/blog/add/')
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
@@ -116,7 +121,7 @@ class PostUpdateViewTest(TestCase):
             author=user,
             category=category,
             status=0,
-            content='My post content'
+            content='My post content',
         )
         cls.post = post
 
@@ -126,13 +131,13 @@ class PostUpdateViewTest(TestCase):
 
     def test_view_url_unauthenticated(self):
         slug = self.post.slug
-        url = f'/blog/_u/{slug}/'
+        url = f'/blog/add/{slug}/'
         response = self.client.get(url)
         self.assertTrue(response.status_code, 404)
 
     def test_view_url_exists_at_desired_location(self):
         slug = self.post.slug
-        response = self.authenticated_client.get(f'/blog/_u/{slug}/')
+        response = self.authenticated_client.get(f'/blog/edit/{slug}/')
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
@@ -149,27 +154,6 @@ class PostUpdateViewTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'blog/post_form.html')
-
-    def test_valid_post(self):
-        post = self.post
-        slug = post.slug
-
-        response = self.authenticated_client.post(
-            reverse('blog:post_update', args=[slug]),
-            {
-                'title': post.title,
-                'category': post.category_id,
-                'content': post.content,
-                'status': 1,
-            }
-        )
-        self.assertRedirects(
-            response,
-            expected_url=reverse('blog:post_detail', args=[slug]),
-            status_code=302,
-            target_status_code=200,
-            fetch_redirect_response=True
-        )
 
 
 class PostDeleteViewTest(TestCase):

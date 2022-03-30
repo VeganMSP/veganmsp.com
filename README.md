@@ -4,5 +4,4 @@
 
 Just another vegan information site, this time brought to you in Django.
 
-Preview available at <https://dev.veganmsp.com>. (Migration still in
-progress...)
+<https://veganmsp.com>

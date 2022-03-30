@@ -1,10 +1,14 @@
+# pylint: disable=missing-module-docstring,
+# pylint: disable=missing-class-docstring,
+# pylint: disable=missing-function-docstring
+# pylint: disable=invalid-name
+# pylint: disable=protected-access
+
 from django.test import TestCase
 
 from info.models import (
     City,
-    Neighborhood,
     Address,
-    RestaurantLocation,
     Restaurant,
     FarmersMarket,
     VeganCompany,
@@ -28,10 +32,10 @@ class CityModelTestCase(TestCase):
         field_label = city._meta.get_field('name').verbose_name
         self.assertEqual(field_label, "name")
 
-    def test_description_label(self):
+    def test_slug_label(self):
         city = self.city
-        field_label = city._meta.get_field('description').verbose_name
-        self.assertEqual(field_label, "description")
+        field_label = city._meta.get_field('slug').verbose_name
+        self.assertEqual(field_label, "slug")
 
     def test_date_created_label(self):
         city = self.city
@@ -52,57 +56,6 @@ class CityModelTestCase(TestCase):
         city = self.city
         expected_object_name = city.name
         self.assertEqual(str(city), expected_object_name)
-
-
-class NeighborhoodModelTestCase(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        # Set up non-modified objects used by all the test methods
-        city = City.objects.create(
-            name='Simpletown',
-        )
-        cls.city = city
-
-        neighborhood = Neighborhood.objects.create(
-            city=city,
-            name='Market Square'
-        )
-        cls.neighborhood = neighborhood
-
-    def test_name_label(self):
-        neighborhood = self.neighborhood
-        field_label = neighborhood._meta.get_field('name').verbose_name
-        self.assertEqual(field_label, "name")
-
-    def test_city_label(self):
-        neighborhood = self.neighborhood
-        field_label = neighborhood._meta.get_field('city').verbose_name
-        self.assertEqual(field_label, "city")
-
-    def test_description_label(self):
-        neighborhood = self.neighborhood
-        field_label = neighborhood._meta.get_field('description').verbose_name
-        self.assertEqual(field_label, "description")
-
-    def test_date_created_label(self):
-        neighborhood = self.neighborhood
-        field_label = neighborhood._meta.get_field('date_created').verbose_name
-        self.assertEqual(field_label, "date created")
-
-    def test_date_updated_label(self):
-        neighborhood = self.neighborhood
-        field_label = neighborhood._meta.get_field('date_updated').verbose_name
-        self.assertEqual(field_label, "date updated")
-
-    def test_verbose_name_plural(self):
-        neighborhood = self.neighborhood
-        verbose_name_plural = neighborhood._meta.verbose_name_plural
-        self.assertEqual(verbose_name_plural, "neighborhoods")
-
-    def test_object_name_is_name(self):
-        neighborhood = self.neighborhood
-        expected_object_name = neighborhood.name
-        self.assertEqual(str(neighborhood), expected_object_name)
 
 
 class AddressModelTestCase(TestCase):
@@ -178,50 +131,6 @@ class AddressModelTestCase(TestCase):
         self.assertEqual(str(address), expected_object_name)
 
 
-class RestaurantLocationModelTestCase(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        # Set up non-modified objects used by all the test methods
-        city = City.objects.create(
-            name='Simpletown',
-        )
-        cls.city = city
-
-        address = Address.objects.create(
-            city=city,
-            name='1234 Simple Street',
-            street1='1234 Simple Street',
-            state='PA',
-        )
-        cls.address = address
-
-        restaurant_location = RestaurantLocation.objects.create(
-            address=address,
-            phone='555-555-8008',
-        )
-        cls.restaurant_location = restaurant_location
-
-    def test_address_label(self):
-        restaurant_location = self.restaurant_location
-        field_label = restaurant_location._meta.get_field('address').verbose_name  # noqa: E501
-        self.assertEqual(field_label, "address")
-
-    def test_phone_label(self):
-        restaurant_location = self.restaurant_location
-        field_label = restaurant_location._meta.get_field('phone').verbose_name
-        self.assertEqual(field_label, "phone")
-
-    def test_verbose_name_plural(self):
-        restaurant_location = self.restaurant_location
-        verbose_name_plural = restaurant_location._meta.verbose_name_plural
-        self.assertEqual(verbose_name_plural, "restaurant locations")
-
-    def test_object_name_is_address_city_name(self):
-        restaurant_location = self.restaurant_location
-        expected_object_name = restaurant_location.address.city.name
-        self.assertEqual(str(restaurant_location), expected_object_name)
-
-
 class RestaurantModelTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -231,23 +140,9 @@ class RestaurantModelTestCase(TestCase):
         )
         cls.city = city
 
-        address = Address.objects.create(
-            city=city,
-            name='1234 Simple Street',
-            street1='1234 Simple Street',
-            state='PA',
-        )
-        cls.address = address
-
-        restaurant_location = RestaurantLocation.objects.create(
-            address=address,
-            phone='555-555-8008',
-        )
-        cls.restaurant_location = restaurant_location
-
         restaurant = Restaurant.objects.create(
             name='Phil\'s Pizza',
-            location=restaurant_location,
+            location=city
         )
         cls.restaurant = restaurant
 
@@ -455,12 +350,12 @@ class LinkCategoryModelTestCase(TestCase):
 
     def test_object_name_is_link_category_path_level_3(self):
         link_category = LinkCategory.objects.get(id=self.first_id + 2)
-        expected_object_name = 'Link Category 0 -> Link Category 1 -> Link Category 2'  # noqa: E501
+        expected_object_name = 'Link Category 0 -> Link Category 1 -> Link Category 2'
         self.assertEqual(str(link_category), expected_object_name)
 
     def test_object_name_is_link_category_path_level_4(self):
         link_category = LinkCategory.objects.get(id=self.first_id + 3)
-        expected_object_name = 'Link Category 0 -> Link Category 1 -> Link Category 2 -> Link Category 3'  # noqa: E501
+        expected_object_name = 'Link Category 0 -> Link Category 1 -> Link Category 2 -> Link Category 3'  # pylint: disable=line-too-long
         self.assertEqual(str(link_category), expected_object_name)
 
 

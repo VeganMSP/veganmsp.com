@@ -2,6 +2,7 @@ from dal.autocomplete import Select2QuerySetView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView
+from django.utils import timezone
 
 from .forms import PostModelForm
 from .models import Post, Category
@@ -75,11 +76,12 @@ def post_update(request, slug):
     if form.is_valid():
         post = form.save(commit=False)
         post.save()
+        tz = timezone.localtime(post.date_created)
         return redirect(
             'blog:post_detail_by_date',
-            post.date_created.year,
-            post.date_created.strftime("%m"),
-            post.date_created.strftime("%d"),
+            tz.year,
+            tz.strftime("%m"),
+            tz.strftime("%d"),
             post.slug
         )
 

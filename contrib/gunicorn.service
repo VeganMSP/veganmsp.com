@@ -1,0 +1,15 @@
+[Unit]
+Description=VeganMSP.com Django Site
+Wants=network.target
+Wants=postgresql.target
+Before=network.target
+Before=postgresql.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/veganmsp.com/
+ExecStart=/var/www/veganmsp.com/venv/bin/gunicorn veganmsp.wsgi -b 127.0.0.1:5000
+ExecStop=/usr/bin/pkill gunicorn
+
+[Install]
+WantedBy=multi-user.target

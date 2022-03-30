@@ -57,7 +57,13 @@ def post_create(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blog:post_detail', post.slug)
+            return redirect(
+                'blog:post_detail_by_date',
+                post.date_created.year,
+                post.date_created.strftime("%m"),
+                post.date_created.strftime("%d"),
+                post.slug
+            )
     form = PostModelForm()
     return render(request, 'blog/post_form.html', {'form': form})
 
@@ -67,8 +73,15 @@ def post_update(request, slug):
     post = get_object_or_404(Post, slug=slug)
     form = PostModelForm(request.POST or None, instance=post)
     if form.is_valid():
-        form.save()
-        return redirect('blog:post_detail', slug)
+        post = form.save(commit=False)
+        post.save()
+        return redirect(
+            'blog:post_detail_by_date',
+            post.date_created.year,
+            post.date_created.strftime("%m"),
+            post.date_created.strftime("%d"),
+            post.slug
+        )
 
     return render(request, 'blog/post_form.html', {'form': form})
 

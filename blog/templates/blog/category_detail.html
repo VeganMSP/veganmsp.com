@@ -6,7 +6,7 @@
 <h2>{{current_category | html_arrows | safe}}</h2>
 {% if posts %}
 	{% for post in posts %}
-		{{post.date_created | date:"Y-m-d"}} <a href="{% url 'blog:post_detail' post.slug %}">{{post}}</a>
+		{{post.date_created | date:"Y-m-d"}} <a href="{% url 'blog:post_detail' post.slug %}">{{post}}</a><br/>
 	{% endfor %}
 {% endif %}
 {% endblock %}

@@ -18,8 +18,7 @@ class PostModelForm(CustomForm):
         widgets = {
             'content': Textarea(
                 attrs={
-                    'rows': 30,
-                    'cols': 84,
+                    'rows': 20,
                     'style': 'font-family: monospace'
                 }),
             'category': ModelSelect2(url='blog:category-autocomplete'),

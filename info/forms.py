@@ -36,8 +36,7 @@ class BaseRestaurantForm(CustomForm):
             ),
             'description': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 84,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),
@@ -59,8 +58,7 @@ class RestaurantAddForm(BaseRestaurantForm):
             ),
             'description': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 84,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),
@@ -79,8 +77,7 @@ class BaseVeganCompanyForm(CustomForm):
         widgets = {
             'description': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 84,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),
@@ -101,8 +98,7 @@ class VeganCompanyAddForm(BaseVeganCompanyForm):
             ),
             'description': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 84,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),
@@ -122,8 +118,7 @@ class BaseFarmersMarketForm(CustomForm):
         widgets = {
             'hours': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 64,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),
@@ -144,8 +139,7 @@ class FarmersMarketAddForm(BaseFarmersMarketForm):
             ),
             'hours': Textarea(
                 attrs={
-                    'rows': 15,
-                    'cols': 64,
+                    'rows': 5,
                     'style': 'font-family: monospace'
                 }
             ),

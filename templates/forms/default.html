@@ -15,7 +15,8 @@
         <span class="text-muted">{{ field.help_text|safe }}</span>
       {% endif %}
     </div>
-    <div class="col-sm-5">
+    <div class="{% with wt=field.widget_type %}{% if wt == 'textarea' %}
+    col-md {% else %}col-sm-5 {% endif %}{% endwith %}">
       {{ errors }}
       {{ field }}
       {% if forloop.last %}

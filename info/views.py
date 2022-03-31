@@ -61,7 +61,7 @@ class RestaurantIndex(ListView):
     template_name = 'info/restaurant_list.html'
 
     def get_queryset(self):
-        return Restaurant.objects.order_by('location', 'name')
+        return Restaurant.objects.order_by('location__name', 'name')
 
 
 class AllVeganRestaurants(ListView):

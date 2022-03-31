@@ -11,8 +11,6 @@ from generic.views import (
     SlugEditViewWithLinkCategoryForm,
 )
 
-from blog.models import Post
-
 from .forms import (
     BaseFarmersMarketForm,
     BaseLinkForm,
@@ -31,21 +29,6 @@ from .models import (
     Restaurant,
     VeganCompany,
 )
-
-
-class IndexView(TemplateView):
-    template_name = 'info/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['recent_posts_list'] = Post.objects.order_by(
-            '-date_created'
-        )[:5]
-        return context
-
-
-class AboutView(TemplateView):
-    template_name = 'info/about.html'
 
 
 class LinkIndex(TemplateView):

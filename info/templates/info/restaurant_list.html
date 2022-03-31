@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="page-title">Restaurants</h1>
 
 {% if user.is_authenticated %}
 	<a href="{% url 'info:restaurant_create' %}">Add Restaurant</a>
 {% endif %}
 
+<h1 class="page-title">Restaurants</h1>
+
 {% if restaurant_list %}
 {% regroup restaurant_list by location as location_list %}
+	<div class="navbar navbar-expand-sm" role="navigation">
+		Jump to city: 
+		<ul class="nav">
+			{% for location, restaurants in location_list %}
+			<li class="nav-item">
+				<a class="nav-link" href="#{{location.slug}}">
+					{{location}}
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
 	{% for location, restaurants in location_list %}
 		<h2 id="{{location.slug}}">{{location}}</h2>
 		<ul>

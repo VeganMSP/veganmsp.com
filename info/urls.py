@@ -1,11 +1,11 @@
 from django.urls import path
 
+from pages.views import PageView
 from . import views
 
 app_name = 'info'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('about/', views.AboutView.as_view(), name='about'),
+    path('', PageView.as_view(), name='index'),
     path('links/', views.LinkIndex.as_view(), name='links_index'),
     path(
         'restaurants/', views.RestaurantIndex.as_view(),

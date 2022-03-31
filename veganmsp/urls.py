@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 
+from pages.views import PageView
+
 urlpatterns = [
     path('', include('info.urls')),
     path('accounts/', include('allauth.urls')),
@@ -24,5 +26,10 @@ urlpatterns = [
     re_path(
         r'^invitations/',
         include('invitations.urls', namespace='invitations'),
-    )
+    ),
+    re_path(
+        r'^.*|<page:page>/',
+        PageView.as_view(),
+        name='page_view',
+    ),
 ]

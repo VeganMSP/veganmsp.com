@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="page-title">Restaurants</h1>
 
 {% if user.is_authenticated %}
 	<a href="{% url 'info:restaurant_create' %}">Add Restaurant</a>
 {% endif %}
+
+<h1 class="page-title">Restaurants</h1>
 
 {% if restaurant_list %}
 {% regroup restaurant_list by location as location_list %}

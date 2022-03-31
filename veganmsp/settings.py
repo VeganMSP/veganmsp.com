@@ -43,6 +43,7 @@ SITE_ID = 1
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'info.apps.InfoConfig',
+    'pages.apps.PagesConfig',
     'generic',
 
     'dal',

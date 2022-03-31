@@ -11,6 +11,8 @@ from generic.views import (
     SlugEditViewWithLinkCategoryForm,
 )
 
+from blog.models import Post
+
 from .forms import (
     BaseFarmersMarketForm,
     BaseLinkForm,
@@ -21,8 +23,6 @@ from .forms import (
     RestaurantAddForm,
     VeganCompanyAddForm
 )
-
-from blog.models import Post
 
 from .models import (
     City,

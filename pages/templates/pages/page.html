@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% load markdown_extras %}}
+{% block title %}{{page.title}} - VeganMSP.com{% endblock %}
+{% block page_title %}{{page.title}}{% endblock %}
+
+{% block content %}
+  {{ page.content | markdown | safe }}
+{% endblock %}

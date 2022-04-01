@@ -11,7 +11,7 @@ django-appconf==1.0.5
 django-autocomplete-light==3.9.1
 django-compressor==3.1
 django-extensions==3.1.5
-git+https://github.com/gyana/django-invitations.git@141b87895901bea3700fa6dd46b657800764e83f
+git+https://github.com/jazzband/django-invitations.git
 django-js-asset==2.0.0
 django-libsass==0.9
 django-mptt==0.13.4

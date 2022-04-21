@@ -37,10 +37,12 @@ try:
 except KeyError:
     env = "Production"
 
-if env.upper() == "Development".upper():
+if env.upper() == "DEVELOPMENT":
     DEBUG = True
     ALLOWED_HOSTS = []
-elif env.upper() == "Production".upper():
+elif env.upper() == "TESTING":
+    ALLOWED_HOSTS = ["localhost"]
+elif env.upper() == "PRODUCTION":
     ALLOWED_HOSTS = ["veganmsp.com"]
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True

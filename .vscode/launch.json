@@ -5,11 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Django",
+      "name": "Python: Django Development",
       "type": "python",
       "request": "launch",
       "env": {
         "DJANGO_ENVIRONMENT": "Development"
+      },
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "runserver"
+      ],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Django Testing",
+      "type": "python",
+      "request": "launch",
+      "env": {
+        "DJANGO_ENVIRONMENT": "Testing"
       },
       "program": "${workspaceFolder}/manage.py",
       "args": [

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo $(pwd)
+pwd
 
 ls ./blog
 

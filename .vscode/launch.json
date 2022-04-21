@@ -8,6 +8,9 @@
       "name": "Python: Django",
       "type": "python",
       "request": "launch",
+      "env": {
+        "DJANGO_ENVIRONMENT": "Development"
+      },
       "program": "${workspaceFolder}/manage.py",
       "args": [
         "runserver"

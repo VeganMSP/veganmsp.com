@@ -8,6 +8,7 @@ from info.models import LinkCategory
 
 
 class BaseAddView(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     add_another = False
 
     def get(self, request, *args, **kwargs):
@@ -48,6 +49,7 @@ class BaseAddView(LoginRequiredMixin, View):
 
 
 class BaseAddViewWithAddressForm(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     add_another = False
 
     def get(self, request, *args, **kwargs):
@@ -96,6 +98,7 @@ class BaseAddViewWithAddressForm(LoginRequiredMixin, View):
 
 
 class BaseAddViewWithLinkCategoryForm(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     add_another = False
 
     def get(self, request, *args, **kwargs):
@@ -151,6 +154,7 @@ class BaseAddViewWithLinkCategoryForm(LoginRequiredMixin, View):
 
 
 class BaseEditView(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument, redefined-builtin
     def get(self, request, id, *args, **kwargs):
         obj = get_object_or_404(self.model_class, id=id)
         obj.deletable, _ = obj.is_deletable()
@@ -181,6 +185,7 @@ class BaseEditView(LoginRequiredMixin, View):
 
 
 class SlugEditViewWithAddressForm(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     def get(self, request, slug, *args, **kwargs):
         obj = get_object_or_404(self.model_class, slug=slug)
         obj.deletable, _ = obj.is_deletable()
@@ -221,6 +226,7 @@ class SlugEditViewWithAddressForm(LoginRequiredMixin, View):
 
 
 class SlugEditViewWithLinkCategoryForm(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     def get(self, request, slug, *args, **kwargs):
         obj = get_object_or_404(self.model_class, slug=slug)
         obj.deletable, _ = obj.is_deletable()
@@ -261,6 +267,7 @@ class SlugEditViewWithLinkCategoryForm(LoginRequiredMixin, View):
 
 
 class SlugEditView(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     def get(self, request, slug, *args, **kwargs):
         obj = get_object_or_404(self.model_class, slug=slug)
         obj.deletable, _ = obj.is_deletable()
@@ -291,6 +298,7 @@ class SlugEditView(LoginRequiredMixin, View):
 
 
 class BaseDeleteView(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument, redefined-builtin
     def get(self, request, id, *args, **kwargs):
         obj = get_object_or_404(self.model_class, id=id)
         obj.deletable, _ = obj.is_deletable()
@@ -309,6 +317,7 @@ class BaseDeleteView(LoginRequiredMixin, View):
 
 
 class SlugDeleteView(LoginRequiredMixin, View):
+    # pylint: disable=unused-argument
     def get(self, request, slug, *args, **kwargs):
         obj = get_object_or_404(self.model_class, slug=slug)
         obj.deletable, _ = obj.is_deletable()
@@ -326,5 +335,5 @@ class SlugDeleteView(LoginRequiredMixin, View):
         return redirect(self.redirect_target)
 
 
-class BaseListView(LoginRequiredMixin, ListView):
+class BaseListView(LoginRequiredMixin, ListView):  # pylint: disable=too-many-ancestors
     pass

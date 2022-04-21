@@ -21,7 +21,7 @@ def main():
         superuser.save()
     except IntegrityError:
         print(f'Super user with {SU_NAME} already exists.')
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-except
         print(e)
 
 

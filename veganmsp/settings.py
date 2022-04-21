@@ -16,7 +16,7 @@ from pathlib import Path
 
 
 try:
-    from .secrets import *  # noqa:F403
+    from .secrets import *  # pylint: disable=wildcard-import, unused-wildcard-import
 except ImportError:
     raise Exception("A secrets.py is required to run this project.")
 
@@ -165,16 +165,16 @@ INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa: E501
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # pylint: disable=line-too-long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa: E501
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # pylint: disable=line-too-long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa: E501
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # pylint: disable=line-too-long
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa: E501
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # pylint: disable=line-too-long
     },
 ]
 

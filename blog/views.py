@@ -33,6 +33,7 @@ class PostDetail(DetailView):
 
 
 class PostDetailByDate(DetailView):
+    # pylint: disable=unused-argument, too-many-arguments
     template_name = 'blog/post_detail.html'
 
     def get(self, request, year, month, day, slug, *args, **kwargs):

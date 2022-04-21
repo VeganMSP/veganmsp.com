@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = APP_SECRET  # noqa: F405
+SECRET_KEY = APP_SECRET  # pylint: disable=undefined-variable
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
@@ -141,11 +141,11 @@ WSGI_APPLICATION = 'veganmsp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DATABASE_NAME,  # noqa: F405
-        'USER': DATABASE_USER,  # noqa: F405
-        'PASSWORD': DATABASE_PASS,  # noqa: F405
-        'HOST': DATABASE_HOST,  # noqa: F405
-        'PORT': DATABASE_PORT,  # noqa: F405
+        'NAME': DATABASE_NAME,  # pylint: disable=undefined-variable
+        'USER': DATABASE_USER,  # pylint: disable=undefined-variable
+        'PASSWORD': DATABASE_PASS,  # pylint: disable=undefined-variable
+        'HOST': DATABASE_HOST,  # pylint: disable=undefined-variable
+        'PORT': DATABASE_PORT,  # pylint: disable=undefined-variable
     }
 }
 

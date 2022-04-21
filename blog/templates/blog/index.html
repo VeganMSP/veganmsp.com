@@ -22,7 +22,7 @@
 			</a>
 			{% endwith %}
 		</h3>
-		<p class="post-content">{{ post.content | markdown | safe | slice:":300" }}</p>
+		<p class="post-content">{{ post.content | markdown | safe | truncatewords_html:50 }}</p>
 	</div>
 	{% endfor %}
 	{% else %}

@@ -32,9 +32,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = APP_SECRET  # noqa: F405
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+try:
+    env = os.environ["DJANGO_ENVIRONMENT"]
+except KeyError:
+    env = "Production"
 
-ALLOWED_HOSTS = []
+if env.upper() == "Development".upper():
+    DEBUG = True
+    ALLOWED_HOSTS = []
+elif env.upper() == "Production".upper():
+    ALLOWED_HOSTS = ["veganmsp.com"]
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 SITE_ID = 1
 

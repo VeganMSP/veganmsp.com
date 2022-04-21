@@ -18,7 +18,7 @@ from pathlib import Path
 try:
     from .secrets import *  # pylint: disable=wildcard-import, unused-wildcard-import
 except ImportError:
-    raise Exception("A secrets.py is required to run this project.")
+    raise Exception("A secrets.py is required to run this project.") from ImportError
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

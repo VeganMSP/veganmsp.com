@@ -8,7 +8,7 @@ class CustomForm(ModelForm):
     template_name = 'forms/default.html'
 
     def __init__(self, *args, **kwargs):
-        super(CustomForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         for visible in self.visible_fields():
             print(type(visible.field))
             if type(visible.field) is BooleanField:

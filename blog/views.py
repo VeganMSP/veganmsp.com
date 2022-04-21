@@ -1,8 +1,8 @@
-from dal.autocomplete import Select2QuerySetView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.utils import timezone
+from dal.autocomplete import Select2QuerySetView
 
 from .forms import PostModelForm
 from .models import Post, Category

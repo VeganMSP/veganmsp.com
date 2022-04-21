@@ -1,9 +1,9 @@
-from dal.autocomplete import ModelSelect2
 from django.forms import (
     BooleanField,
     Textarea,
     TextInput,
 )
+from dal.autocomplete import ModelSelect2
 
 from generic.forms import CustomForm
 

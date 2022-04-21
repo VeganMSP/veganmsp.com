@@ -1,5 +1,5 @@
-from dal.autocomplete import ModelSelect2
 from django.forms import Textarea
+from dal.autocomplete import ModelSelect2
 
 from generic.forms import CustomForm
 

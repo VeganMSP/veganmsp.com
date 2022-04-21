@@ -1,5 +1,5 @@
-from dal.autocomplete import Select2QuerySetView
 from django.views.generic import TemplateView, ListView
+from dal.autocomplete import Select2QuerySetView
 
 from generic.views import (
     BaseAddView,

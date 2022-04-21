@@ -38,7 +38,7 @@
 		{% for market in farmers_market_list %}
 			<li>
 				{% if market.website %}
-				<a href="">{{ market.name }}</a>
+				<a href="{{ market.website }}">{{ market.name }}</a>
 				{% else %}
 				{{ market.name }}
 				{% endif %}
